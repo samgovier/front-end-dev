@@ -372,3 +372,16 @@ About Functions
 * Execution Context is in which any piece of code executes. Uses the global object and the call object to get variables, along with the scope chain to search for variables
 * Functions may be nested: inner has access to outer, but not the other way around. It's also not accessible outside it's definition scope
 * Look up [closures](http://www.jibbering.com/faq/notes/closures/)...
+
+Function Binding
+---
+The process of deciding with `this` is is called __function binding__. When a function is a property of an object and that function is invoked from the object, the function becomes bound to the object, giving you access to the containing object via this.
+
+Depending on the context in which the function is invoked, `this` may refer to an object other than it's origin. This can cause confusion for new developers, because `this` will not contain what you're expecting in some cases. Eg. an HTML element may call the function, and in that case `this` refers to the element and not the original object.
+
+This can be corrected by creating a "wrapper function" that ensures the function is invoked by the correct object. However, this may cause issues if any arguments are meant to be passed: they'll be lost in translation. In this case, we'd want to use the `.apply()` method to pass any arguments... this gets verbose though.
+
+The Microsoft Ajax framework adds a class method to the Function class to make this easier, named `createDelegate`. I would maybe look this up when you need it.
+
+Error Handling
+===
