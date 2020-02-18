@@ -385,3 +385,37 @@ The Microsoft Ajax framework adds a class method to the Function class to make t
 
 Error Handling
 ===
+Exceptions in JS are represented by the `Error` object with 6 derived classes:
+* Error(message)
+* EvalError(message)
+* RangeError(message)
+* ReferenceError(message)
+* SyntaxError(message)
+* TypeError(message)
+* URIError(message)
+
+Use the `instanceof` operator to determine the error type. They all provide a `.message`, `.name`, and toString()
+
+To signal something abnormal you can throw exceptions:
+    
+    throw new Error("info");
+
+Beyond that, you can use the standard try/catch/finally.
+
+Timeouts and Intervals
+===
+You can set timers and intervals for when things should be dropped.
+
+    var id = setTimeout(delegate[, delay, p1, p2, ...]);
+
+    var id = setInterval(delegate, delay[, p1, p2, ...]);
+
+Where `delegate` is the function to execute after `delay` ms. default for timeout is 0 ms. params are passed to the delegate.
+
+The timeout is minimum, and they could take longer, for example if the page, OS, browser is busy with other tasks, or if timeout is throttled to a longer time.
+
+Use the appropriate function to clear the timer you previously set
+
+    clearTimeout(id);
+    
+    clearInterval(id);

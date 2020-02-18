@@ -44,3 +44,20 @@ for(singleString in strings)
   delete strings[singleString];
 }
 //5. As a string is written, delete it from the object.
+
+// Set several timeouts to display the following:
+var wfi = function () { console.log("Wait for it...") }
+//   (after 1 second) Wait for it...
+var id = setTimeout(wfi, 1000);
+
+
+wfi = function () { console.log("Keep waiting...") }
+id = setTimeout(wfi, 5000);
+
+//   (after 2 seconds) Keep waiting...
+
+var startIn = function () {
+  var idd = setInterval(function () {console.log("BOO!")}, 500)
+}
+//   (after 5 seconds) BOO!
+id = setTimeout(startIn, 10000);
