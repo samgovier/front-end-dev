@@ -121,6 +121,10 @@ Type Handling
 * Numbers & Booleans are handled by value
 * Objects & Arrays are handled by reference
 
+Boxing and Unboxing
+---
+You can box via `var boxed = new Type(value)`. Unbox with the `boxed.valueOf()` function. Unboxing will happen automatically in some cases.
+
 Variables
 ===
 
@@ -160,9 +164,9 @@ Other operators:
 * `void x` : ignores x and evaluates to undefined
 * `, // comma` : evaluates expressions from left to right and return value of rightmost expression
 
-Oh, I guess the last thing... JS and TS both have this differentiation where a c#/powershell `==` acts more like a `===`. The rules of `==` in ECMA 5: [The Abstract Equality Comparison Algorithm](http://www.ecma-international.org/ecma-262/5.1/#sec-11.9.3)
+Oh, I guess the last thing... JS and TS both have this differentiation where a c#/powershell `==` acts more like a `===`. The rules of `==` in ECMA 5: [The Abstract Equality Comparison Algorithm](http://www.ecma-international.org/ecma-262/5.1/#sec-11.9.3). Mainly, `==` will run a type conversion before evaluating equivalence, `===` will not.
 
-I'm not gonna do conditionals, except to say that switches don't require breaks, and so can go through to other cases. Don't forget your breaks!
+I'm not gonna talk about conditionals, except to say that switches don't require breaks, and so can go through to other cases. Don't forget your breaks!
 
 Global Object
 ===
@@ -236,7 +240,7 @@ All objects have the following methods:
 * `obj.isPrototypeOf(object)`: Returns true if obj is the prototype of object.
 * `obj.propertyIsEnumerable(propName)`: Returns true if obj has a non-inherited property with the given name and that property is enumerable (will be included in a for/in loop).
 * `obj.toLocaleString()`: Returns localized string representation of obj, may be overridden.
-* `obj.toString()`: Returns string representation of obj, may be overridden.
+* `obj.toString()`: Returns string representation of obj, may be overridden. Default is __[object *type*]__
 * `obj.valueOf()`: Returns the primitive value of obj, if any, may be overridden.
 
 JSON
