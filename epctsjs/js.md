@@ -247,6 +247,57 @@ JSON
 ---
 Lastly- JSON is a subset of object literals. It contains no functions, and all keys must be enclosed in quotes.
 
+Prototypes
+===
+
+JavaScript is a prototype-based language, so whenever we create a function, the JS engine adds a *prototype* property. When we attach methods and properties to the prototype object, we enable all other objects to inherit these methods and properties.
+
+If you make a function constructor, the prototype has a constructor object.
+
+    // function constructor
+    function Person(name, job, yearOfBirth) {
+        this.name = name;
+        this.job = job;
+        this.yearOfBirth = yearOfBirth;
+    }
+
+    // Person.prototype contains Person
+
+Now if you add a method, that will also be in the prototype and will be accessible by instances of the constructor.
+
+    Person.prototype.calculateAge = function() {
+        return 2020 - this.yearOfBirth;
+    }
+
+When a certain method or property is called, first the engine checks the object, and when it doesn't find the call it moves on to the prototype.
+
+    // creating Objects
+    let Person1= new Person('Jenni', 'clerk', 1986);  
+    
+    let Person2= new Person('Madhu', 'Developer', 1997); 
+    
+    Person1.calculateAge();
+    Person2.calculateAge();
+
+These functions return `34` and `23`.
+
+Example JS class for Epic:
+
+    ClassName = function ClassName$constructor() 
+    {
+    }; 
+
+    ClassName.prototype = 
+    { 
+    methodName: function ClassName$methodName() 
+    {  
+    },
+
+    method2Name: function ClassName$method2Name()
+    {
+    } 
+    };
+
 Arrays
 ===
 Constructors
