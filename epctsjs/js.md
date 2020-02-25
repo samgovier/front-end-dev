@@ -154,7 +154,17 @@ Created when the interpreter starts, all variables are properties of the global 
 Operators
 ===
 
-All the same. Just gonna write the Conditional Operator here for practice. More compact than if statement.
+Logical Operators
+---
+Will short circuit evaluation  
+For &&, if left operand is false, returns that value, else value of right operand  
+For ||, if left operand is true, returns that value, else value of right operand  
+! will convert operand to boolean first, so !! is used to convert to boolean  
+
+Etc
+---
+
+Just gonna write the Conditional Operator here for practice. More compact than if statement.
 
     booleanExpr ? trueValue : falseValue
 
