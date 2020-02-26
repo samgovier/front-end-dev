@@ -19,3 +19,35 @@ But the emitted JS in ECMA 5 would look like this:
     var a = 1;
     if (true) { var a_1 = 2; }
 
+Debugging on the client
+---
+
+Even though the browser is executin JS, debugging in TS is done when using browser developer tools, like in Chrome.
+
+This is done with a `js.map` file, like this one:
+
+    {"version":3,"file":"app.js","sourceRoot":"","sources":["app.ts"],"names":["Epic","Epic.Training","Epic.Training.Example","Epic.Training.Example.Car","Epic.Training.Example.Car.constructor","Epic.Training.Example.Car.drive"],"mappings":"AAAA,IAAU,IAAI,CAMb;AAND,WAAU,IAAI;IAACA,IAAAA,QAAQA,CAMtBA;IANcA,WAAAA,QAAQA;QAACC,IAAAA,OAAOA,CAM9BA;QANuBA,WAAAA,OAAOA,EAACA,CAACA;YAChCC;gBAAAC;gBAIAC,CAACA;gBAHOD,mBAAKA,GAAZA;oBACCE,OAAOA,CAACA,GAAGA,CAACA,SAASA,CAACA,CAACA;gBACxBA,CAACA;gBACFF,UAACA;YAADA,CAACA,AAJDD,IAICA;YAJYA,WAAGA,MAIfA,CAAAA;QACFA,CAACA,EANuBD,OAAOA,GAAPA,gBAAOA,KAAPA,gBAAOA,QAM9BA;IAADA,CAACA,EANcD,QAAQA,GAARA,aAAQA,KAARA,aAAQA,QAMtBA;AAADA,CAACA,EANS,IAAI,KAAJ,IAAI,QAMb;AACD,IAAI,KAAK,GAAG,IAAI,IAAI,CAAC,QAAQ,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC;AAC5C,KAAK,CAAC,KAAK,EAAE,CAAC"}
+
+In order for this debugging to work, you need the executed .js, the original transpiled .ts, and the .js.map file.
+__However__ if the file is being minified via deployment (.min.js), this invalidates .js.map and debugging is not possible.
+
+Using JS with TS
+---
+
+TS allows for type declaration files (`.d.ts`). Think of this as a header file for the following purposes:
+1. Providing type information for JS code so that TS code can be written against it.
+2. Sharing type info for TS code from a given project so that other projects can use it as well.
+3. Providing additional type info, through interfaces and generic parameters, that result in more strongly typed consuming code.
+
+Typescript uses type declaration files to augment standard JavaScript classes and DOM objects with type information. There is a special file included with TypeScript named `lib.d.ts` explicitly for this purposes. For example, `parseInt` is included to make it strongly typed:
+
+    /**
+    * Converts A string to an integer.
+    * @param s A string to convert into a number.
+    * @param radix A value between 2 and 36 that specifies the base of the number in numString.
+    * If this argument is not supplied, strings with a prefix of '0x' are considered hexadecimal.
+    * All other strings are considered decimal.
+    */
+    declare function parseInt(s: string, radix?: number): number;
+
+Not going to go in great deal here because in lots of cases, they are generated for you. It's not uncommon to have these files written for JavaScript as well, because unnecessarily rewriting JS into TS is a waste of time. In general, type declaration files are placed in a common, shared path so they are easy to find without needing to hunt down the source *.ts file.
