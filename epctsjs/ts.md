@@ -51,3 +51,27 @@ Typescript uses type declaration files to augment standard JavaScript classes an
     declare function parseInt(s: string, radix?: number): number;
 
 Not going to go in great deal here because in lots of cases, they are generated for you. It's not uncommon to have these files written for JavaScript as well, because unnecessarily rewriting JS into TS is a waste of time. In general, type declaration files are placed in a common, shared path so they are easy to find without needing to hunt down the source *.ts file.
+
+Basic Syntax
+===
+
+Data Types
+---
+
+Because Typescript is a superset of JS, all JS data types are available. Boolean, Number and String are also available via their respective keywords (`boolean`, `number`, and `string`), which are preferred.
+
+New types!
+* __any__ - A type keyword that disables type checking for the variable.
+* __unknown__ - A type keyword that forces assertion to a different type before the value can be used.
+* __enum__ - Represents one of a predefined set of named values.
+* __void__ - Used with functions to indicate that the function does return but has no value.
+* __never__ - Use when a function won't return, e.g.:
+    * A function is called that throws an exception
+    * A function is called that starts an infinite loop
+
+Controlling variable scope
+---
+With `var`, scope is hoisted to include the entire context scope, which is either the containing function or global scope. TypeScript also supports `let`, which is block-scoped: `let` is only available within the closest containing block (`{}`). `var` is kind of yikes... let's use `let` whenever possible.
+
+Declaring typed variables
+---
