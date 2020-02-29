@@ -90,3 +90,56 @@ You can declare types for function variables, params, and return types, and well
 Once a type variable has been declared, only values that are *assignment compatible* can be assigned. If an incompatible value is assigned, there will be a compiler error. Although, TypeScript is more permissive than other OOP languages. [Rules.](https://github.com/Microsoft/TypeScript/blob/master/doc/spec.md#3114-assignment-compatibility)
 
 !! `any` should only be used when necessary, and explicitly declared. There is an option to set a flag on the compiler to prevent implicit typing.
+
+If you don't include a data type in your declaration but assign a value, the type will be inferred:
+
+    let myVar = 1; // myVar is inferred to have type `number`
+
+While it may seem safer to declare type, the opposite is actually true: version updates to TypeScript and public API return types can cause explicitly typed code to be fragile, so it is often better to infer type.
+
+Declaring Parameter and Return Types in Functions
+---
+
+Declaring TypeScript functions is just like JS functions, but with explicit typing for parameters.
+
+    function compareNumAndString(numVal: number, stringVal: string): boolean
+    {
+        return numVal.toString() === stringVal;
+    }
+
+If a function doesn't return a value, you can use `void`
+
+    function doWork(): void
+    {
+        // no value returned (return statement optional)
+        return;
+    }
+
+You should explicitly assign return types: if you infer them APIs are more fragile and the consuming code is harder to read.
+
+Arrays
+---
+
+TS arrays can be declared to contain a specific type:
+
+    let myArray: number[];
+
+Don't let the bracket notation fool you though: it's still a JavaScript array, so it has all the weirdness of being a sparse, dynamically sizable array.
+
+__Using for-of`:__  
+Recall JS has `for-in`: TypeScript also supports `for-of`, which iterates over the elements of an array, rather than keys. You can also use this to iterate over the characters of a string! If you try to use `for-of` on something that isn't an array or string, you'll get a compiler error. Objects cannot be iterated in this way.
+
+In TS if you try `for-in` on a string will throw a compiler error: you need to assert type `any` on the variable to get away with this.
+
+Constants
+---
+To declare a constant, use `const`:
+
+    const myConst[: type] = value;
+
+This imposes two restrictions: the variable must be initialized when declared, and it cannot be changed after initialization. If the constant is a reference type, like an object or function, the reference cannot be altered to point at a different instance. Properties of that instance can still be altered, though.
+
+    const greeting = ["Good", "day", "to", "you"];
+    greeting = ["a", "b", "c"]; // compiler error
+    greeting[0] = "Fair"; // legal
+    console.log(greeting);
