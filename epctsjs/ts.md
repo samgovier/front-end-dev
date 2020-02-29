@@ -75,3 +75,18 @@ With `var`, scope is hoisted to include the entire context scope, which is eithe
 
 Declaring typed variables
 ---
+To declare a typed variable:
+
+    let identifier[: type][ = initial value];
+
+The type declaration and initialization are both optional. By default a variable without a type *and* without an assigned expression will have the type `any`.
+
+    let myVar; // Type is any implicitly
+    let myVar: any; // Type is any explicitly
+    let myVar: string; // type is string :)
+
+You can declare types for function variables, params, and return types, and well as fields, properties, and constants.
+
+Once a type variable has been declared, only values that are *assignment compatible* can be assigned. If an incompatible value is assigned, there will be a compiler error. Although, TypeScript is more permissive than other OOP languages. [Rules.](https://github.com/Microsoft/TypeScript/blob/master/doc/spec.md#3114-assignment-compatibility)
+
+!! `any` should only be used when necessary, and explicitly declared. There is an option to set a flag on the compiler to prevent implicit typing.
