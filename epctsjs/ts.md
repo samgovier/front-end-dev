@@ -143,3 +143,36 @@ This imposes two restrictions: the variable must be initialized when declared, a
     greeting = ["a", "b", "c"]; // compiler error
     greeting[0] = "Fair"; // legal
     console.log(greeting);
+
+Enums
+---
+Enums are the same as other C-style languages, but in TS enums are permitted to have non-integer numeric-values and strings. eg.
+
+    enum Constants
+    {
+        e = 2.71828,
+        pi = 3.14159
+    }
+
+    enum RomanNumerals
+    {
+        One="I",
+        Two="II"
+    }
+
+Look up value with Constants.pi, look up key with Constants[3.14159]
+
+if you don't need the enum for anything beyond traditional C-style usage, declare it as a `const enum`. This results in each instance replaced with the numeric equivalent, which is significantly more efficient than a standard enum.
+
+Allowing Multiple Types
+---
+
+If a variable can have multiple types, declare it with a *union* type, declared using the pipe `|`. Here, myVar can be string, number, or boolean:
+
+    let myVar : string | number | boolean;
+
+A union type may be any data type. There is no technical limitation to the number of union types, but it can get over the top. If you define a certain set often, you can define a type alias, covered later.
+
+Instance members accessible to a union type depends on whether the compiler can determine the type. When a value is initialized, the variable can access all members of its current value. If the compiler cannot determine a data type, the variable only has access to the subset of members that all types can access. There are also *intersection types* but we won't cover them here, if you need them for the future you can read [here](https://github.com/Microsoft/TypeScript/blob/master/doc/spec.md#35-intersection-types).
+
+__Type Guardrails:__
