@@ -167,7 +167,9 @@ if you don't need the enum for anything beyond traditional C-style usage, declar
 Allowing Multiple Types
 ---
 
-If a variable can have multiple types, declare it with a *union* type, declared using the pipe `|`. Here, myVar can be string, number, or boolean:
+### Union Types
+
+If a variable can have multiple types, declare it with a *union type*, declared using the pipe `|`. Here, myVar can be string, number, or boolean:
 
     let myVar : string | number | boolean;
 
@@ -175,4 +177,72 @@ A union type may be any data type. There is no technical limitation to the numbe
 
 Instance members accessible to a union type depends on whether the compiler can determine the type. When a value is initialized, the variable can access all members of its current value. If the compiler cannot determine a data type, the variable only has access to the subset of members that all types can access. There are also *intersection types* but we won't cover them here, if you need them for the future you can read [here](https://github.com/Microsoft/TypeScript/blob/master/doc/spec.md#35-intersection-types).
 
-__Type Guardrails:__
+### Type Guardrails
+
+Typescript detects the use of `typeof` and `instanceof` and automatically performs the appropriate type assertion on the tested variable within the following code block. The feature is known as a *type guard* and prevents compile errors because within the block, the compiler knows exactly what data type the variable is, based on the test. The type guard will also ensure you're only accessing members available to the chosen type.
+
+    let test: any = 8;
+    if (typeof test === "number")
+    {
+        /* Using Number.prototype.toExponential(), as if test
+        were a number, even though its type is declared as any */
+        console.log(test.toExponential());
+    }
+
+    let test2: Object = ["a", "b", "c"];
+    if (test2 instanceof Array)
+    {
+        // Using Array.prototype.join(), as test2 is an Array per the test
+        console.log(test2.join("; ));
+    }
+
+    let test: any = 5;
+    if (typeof test === "number")
+    {
+        console.log(test.charAt(0)); // compiler error: number don't have charAt()
+    }
+
+### Union Types and Type Guards
+
+Type guards are especially convenient when paired with union types, because they can narrow possible types in the else branch of an if/else.
+
+Consider a type guard against an `any` variable.
+
+    var myVar: any = "String";
+    if (typeof myVar === "string")
+    {
+        console.log(myVar.charAt(0));
+    }
+    else
+    {
+        console.log(myVar.toExponential(2)); // compiler sees myVar as type any
+    }
+
+In this case, myVar could be anything other than string, so the compiler can't limit the type to something more specific.
+
+    var MyVar: string | number = "This is a string";
+    if (typeof myVar === "string")
+    {
+        console.log(myVar.charAt(0));
+    }
+    else
+    {
+        console.log(myVar.toExponential(2));
+    }
+
+In this case, the compiler determines the variable must be a string and so marks the else branch as unreachable. This is true for a function return value as well, like if I have `= returns String();`.
+
+If it isn't clear at compile time which type the function will return, the type guard will narrow the type for us:
+
+    var myVar: string | number = returnsStringOrNumber();
+    if (typeof myVar === "string")
+    {
+        console.log(myVar.charAt(0)); // definitely a string
+    }
+    else
+    {
+        console.log(myCar.toExponential(2)); // definitely a number, since I know not `never` type
+    }
+
+### User-defined type guards
+
