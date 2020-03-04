@@ -246,3 +246,137 @@ If it isn't clear at compile time which type the function will return, the type 
 
 ### User-defined type guards
 
+You can also create specially defined functions as a *user-defined type guard*. This allows for additional type-guard expressions beyond __typeof__ and __instanceof__. This is useful when you have a union type, *any* type, JS objects, and you want to branch based on the variable's characteristics. THe user-defined type guard returns a boolean as `argumentName is SomeType`, indicating the argument matches Some Type. This is a function return type. For example:
+
+    function isStringArray(arg: Object): arg is string[]
+    {
+        if (arg instanceof Array)
+        {
+            for (let element of arg)
+            {
+                if (typeof element !== "string")
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
+In the code body, the return type is boolean, asserting the argument is or isn't the type we're checking. However, user-defined type guards should be used sparingly-- in general, their use is considered as a warning that code may be unnecessarily complex or fragile.
+
+### Unknown
+
+The type `unknown` is useful as a replacement for `any`. Unlike any, which disables type checking, `unknown` forces the programmer to cast or guard to a specific type.
+
+Asserting Type
+---
+
+Occasionally you may need to tell the TS compiler that a variable is of a different type than the compiler thinks it is. This is known as *type assertion*. However, doing so can lead to compile or run-time errors if the type assertion is not correct. This can be done via the `as` keyword.
+
+    varOfNewType = varOfOldType as NewType;
+
+Every assertion is either *illegal, incorrect, or correct*.
+
+### Illegal
+
+A type assertion is illegal if a value of the original type could not possibly be assigned to a variable of the new type. Keep in mind that an assertion is deemed illegal based on the variable *type*, not the *value* itself.
+
+    let myString = "abc";
+    let myNum = myString as number; // compiler error
+    myString = "123";
+    myNum = myString as number; // still compiler error
+
+### Incorrect
+
+If the value assigned is assertable, but doesn't make sense, the assertion is legal but incorrect.
+
+    let myVal: any = "abc";
+    let myNum = myVar as number; // legal, but incorrect: no compile error
+
+The above assertion is legal because the compiler considers `any` typeless. But the assertion is incorrect, because it doesn't make sense given the value. This assertion only matters at run time, when you try to use the new value in an incorrect way. This most commonly arises when trying to access a property on the asserted type but not the runtime value:
+
+    console.log(myNum.toExponential(2)); // runtime error: "abc" doesn't have that method
+
+### Correct
+
+A type assertion is correct if it's not illegal or incorrect. No errors.
+
+Aliasing Types
+---
+
+You can declare aliases for any types: useful for encapsulating union types.
+
+    type AliasName = Type1 | Type2 | Type3;
+
+    //eg
+    type Nos = number | string;
+
+    let myVal1: Nos;
+    let myVal2: Nos;
+
+In the case of Objects, interfaces tend to be more flexible (eg. `IEnumerable`).
+
+Null and Undefined
+---
+There is a compiler flag in use here that recognizes `null` and `undefined` as distinct, declarable data types, rather than sub-types of each other. This means a variable can only be one of those values if they're explicitly allowed to be so. Eg:
+
+    let myString: string = "abc";
+    let myNullableString: string | null = "def";
+    let myNullUndefString: string | null | undefined = "ghi";
+
+    myString = null;  //compiler error
+
+    myNullableString = null;
+    myNullableString = undefined;  //compiler error
+
+    myNullUndefString = null;
+    myNullUndefString = undefined;  //no errors
+
+Most variables shouldn't use these types so they can't be unset. If a variable does need to be unset, you should use `undefined` because it is the default state.
+
+There are two ways to make variables `undefined`: either in the variable definition with `| undefined`, or with the `?` operator, which is used for Class member variables or function parameters.
+
+Handling null and undefined really depends on the usage. In cases you may want to detect if the value is null-ish (null or undefined) or false-ish (null-ish, "", 0, `false`, etc.)
+
+For:
+    function myFunction(val: object | boolean | undefined): void 
+    {
+        <Code>
+    }
+
+| How handled                   | Content of `code`                             | Result                                                    |
+|---|---|---|
+| Ignored                       |`console.log(val.toString);`                   | `Compile error: object is possibly undefined`             |
+| Non-Null assertion (`!`)      |`console.log(val!.toString);`                  | Works for all values, but runtime error on `undefined`    |
+| Optional Chaining (`?`)       |`console.log(val?.toString);`                  | Works for all values, `undefined` => "undefined"          |
+| Default if false-ish (`||`)   |`console.log((val || "default").toString());`  | Works, `undefined` & `false` => "default"                 |
+| Default if null-ish (`??`)    |`console.log((val ?? "default").toString());`  | Works, `undefined` => "default"                           |
+| Type Guard                    |`if(typeof val !== "undefined") {c.l(val);}`   | Works fully, undefined skips the block                    |
+
+Commenting Code
+---
+You can do `//` single-line comments and `/* sdf */` block comments.
+
+### JSDoc Comments
+
+XML-style comments cannot be used for intellisense documentation in TS. Instead, we use [JSDoc](https://en.wikipedia.org/wiki/JSDoc), which is similar to Javadoc in Java.
+
+    /**
+     *   Description of the entity that immediately follows
+     *   this comment
+     */
+
+Almost everything can be documented using JSDoc comments:
+* Namespaces
+* Classes
+* Interfaces
+* Enum types
+* Members of the above options
+* Function/method parameters
+
+You can use *@param* to describe parameters.
+
+Functions
+===
