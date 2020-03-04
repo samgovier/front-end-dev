@@ -126,7 +126,7 @@ TS arrays can be declared to contain a specific type:
 
 Don't let the bracket notation fool you though: it's still a JavaScript array, so it has all the weirdness of being a sparse, dynamically sizable array.
 
-__Using for-of`:__  
+__Using `for-of`:__  
 Recall JS has `for-in`: TypeScript also supports `for-of`, which iterates over the elements of an array, rather than keys. You can also use this to iterate over the characters of a string! If you try to use `for-of` on something that isn't an array or string, you'll get a compiler error. Objects cannot be iterated in this way.
 
 In TS if you try `for-in` on a string will throw a compiler error: you need to assert type `any` on the variable to get away with this.
@@ -341,6 +341,7 @@ There are two ways to make variables `undefined`: either in the variable definit
 Handling null and undefined really depends on the usage. In cases you may want to detect if the value is null-ish (null or undefined) or false-ish (null-ish, "", 0, `false`, etc.)
 
 For:
+
     function myFunction(val: object | boolean | undefined): void 
     {
         <Code>
