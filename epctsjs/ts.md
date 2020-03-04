@@ -352,7 +352,7 @@ For:
 | Ignored                       |`console.log(val.toString);`                   | `Compile error: object is possibly undefined`             |
 | Non-Null assertion (`!`)      |`console.log(val!.toString);`                  | Works for all values, but runtime error on `undefined`    |
 | Optional Chaining (`?`)       |`console.log(val?.toString);`                  | Works for all values, `undefined` => "undefined"          |
-| Default if false-ish (`||`)   |`console.log((val || "default").toString());`  | Works, `undefined` & `false` => "default"                 |
+| Default if false-ish (\|\|)   |`console.log((val \|\| "default").toString());`  | Works, `undefined` & `false` => "default"                 |
 | Default if null-ish (`??`)    |`console.log((val ?? "default").toString());`  | Works, `undefined` => "default"                           |
 | Type Guard                    |`if(typeof val !== "undefined") {c.l(val);}`   | Works fully, undefined skips the block                    |
 
