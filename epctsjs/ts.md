@@ -381,3 +381,165 @@ You can use *@param* to describe parameters.
 
 Functions
 ===
+
+A function is the equivalent of a class method. The can also exist class-independent. Functions have been made more flexible in TS from JS.
+
+Anonymous Functions
+---
+In Typescript, anonymous functions can be created with the `function` keyword or using *fat arrow* syntax:
+
+    (signature) => { code body; }
+
+for example, you could pass a callback to an array's forEach method.
+
+    ["a","b","c"].forEach( function(item: string) { console.log(item); } );
+    // OR
+    ["a","b","c"].forEach( (item: string) => { console.log(item); } );
+
+While these might seem the same, there is a slight difference: arrow functions capture `this` where the function is created, rather than where it's invoked. It's important to be careful about when which is used.
+
+Type-Safe Signatures
+---
+
+There are times when you want to declare a type name for particular function signatures. This can be done using *declared signatures*. This is essentially a function type you can add to a variable. This can be done anonymously, but we should explicitly declare our function using this unique `interface` declaration.
+
+    interface MyMath
+    {
+        (baseVal: number, increment: number): number;
+    }
+
+After declaring the signature, we can only assign a function with a compatible signature. We can declare many variables of type `InterfaceName` (`MyMath`) without having to recreate the full signature each time.
+
+    const myAdd: MyMath = function(x: number, y: number) { return x + y; }
+    const mySubtract: MyMath = (x: number, y: number) => { return x - y; }
+
+It is not recommended to use an anonymous function signature, because you have to re-declare the entire signature again, which kind of defeats the point.
+
+    // BAD
+    const myAdd: (baseVal: number, increment: number) => number;
+
+Optional Parameters
+---
+
+In JS, all function parameters are technically optional. This makes functions flexible but it's also impossible to tell at a glance which are required and which aren't:
+
+    function myFunc(a,b,c,d,e)
+    {
+        //is a required? b? c?
+    }
+
+In TS, every parameter is required, unless you explicitly declare it as optional. You can do this by including a `?` immediately after the parameter name, before its data type. They must be after any required parameters.
+
+    function myFunc(a: string, b?: string)
+    {
+        if (b)
+        {
+            // use b
+        }
+        else
+        {
+            // no use b
+        }
+    }
+
+Default Parameters
+---
+
+We still need to explicitly check whether an optional parameter has a value before using it. Instead, we can assign a default value. This can be done via a *default parameter*, which is automatically optional:
+
+    function myFunc(a: string, b: string = "ABC")
+    {
+        // a has the value passed by the caller
+        // b has either the value passed or "ABC"
+    }
+
+Of course, the type doesn't have to be explicitly declared; it is often inferred from the default value:
+
+    function myFunc(a: string, b = "ABC") {}
+
+Arbitrary Number of Parameters
+---
+
+In C#, you can define a method that accepts any number of parameters with the `params` keyword. TS has something similar by way of an ellipses, `...`, also known as a __spread__ operator. You define this before the variable, and it's called a *rest parameter*.
+
+Let's say you want to create a function that accepts an arbitrary number of string arguments, concatenates them together, and returns the result:
+
+    function buildSentence(firstWord: string, ...otherWords: string[]): string
+    {
+        const allWords = [firstWord].concat(otherWords);
+        return allWords.join(" ");
+    }
+
+Because a sentence requires at least one word, the first parameter is required, but the rest are optional. You can now call `buildSentence` with one or more string arguments:
+
+    buildSentence("Buffalo", "buffalo", "Buffalo", "buffalo", "buffalo.");
+
+Some things to remember:
+* A function can only have one rest parameter, and it must be the last, even after optional parameters.
+* A rest parameter can't be assigned a default value, so your body should always check for values.
+* The arguments passed for a rest parameter transpile to a normal JS array.
+
+The __spread operator__ can be used when building, and generally:
+
+    const allWords = [firstWord ,...otherWords];
+
+When invoking a function, you can also use the spread operator to pass an array of values to a rest parameter:
+
+    const otherWords = ["is","a","day","in","the","life","of","a","bear."];
+    const sentence = buildSentence("This", ...otherWords);
+
+Allowing Unused Parameters
+---
+
+Sometimes you may want to define a function that accepts some number of parameters but the code body doesn't actually use them all. If the `--noUnusedParameters` compiler flag is set, this will result in a compiler error. You can tell the compiler to ignore unused parameters by prefixing them with an underscore.
+
+### Delegate Functions
+
+Often, the signature of delegates is determined by where they are used. For example, `Array.forEach()` method expects a function with up to three parameters:
+1. The __value__ this iteration
+2. The __index__ this iteration
+3. The __array__ being iterated through
+
+Unused trailing parameters can be omitted, but unused leading parameters must be prefixed with an underscore to avoid a compile error.
+
+Overloading Functions
+---
+
+Overloading a function or method provides calling code with multiple ways to invoke your API while minimizing the amount of code that you'll need to repeat. TS supports overloading, *kind of*. It's very different from common OOP languages. In other OOP languages, you have multiple implementations, but in TS you have multiple function declarations, and one implementation.
+
+TS doesn't allow us to define multiple functions with the same name. Instead, we have to handle all possible argument types of any defined overloads.
+
+To take advantage of type safety, we can add multiple function signatures that specify the only legal calls for a function. IntelliSense follows these rules. So we must first give the signatures, then the implementation itself. Here's a full implementation for the flexible function `pickCard()`:
+
+    /**
+    * Given an array of cards, choose one at random.
+    * @param deck An array of cards to choose from
+    */
+    function pickCard(deck: Card[]): number;
+
+    /**
+    * Picks the selected card from a full deck
+    * @param cardNum The number of the card to pick
+    */
+    function pickCard(cardNum: number): Card;
+
+    /**
+    * These comments won't show up in IntelliSense.  
+    * This method will be called via one of the previous
+    * declarations, so that documentation is sufficient.
+    */
+    function pickCard(deckOrCardNum: Card[] | number): number | Card 
+    {
+        if (Array.isArray(deckOrCardNum)) 
+        {
+            const myCard = Math.floor(Math.random() * deckOrCardNum.length);
+            return myCard;
+        }
+        else if (typeof deckOrCardNum === "number") 
+        {
+            const pickedSuit = Math.floor(deckOrCardNum / 13);
+            return new Card(pickedSuit, deckOrCardNum % 13)
+        }
+        throw new Error("pickCard only accepts Card arrays and numbers.");
+    }
+
