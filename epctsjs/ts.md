@@ -543,3 +543,358 @@ To take advantage of type safety, we can add multiple function signatures that s
         throw new Error("pickCard only accepts Card arrays and numbers.");
     }
 
+When you overload a function and provide overload signatures, a function call must match one of those signatures, *regardless* of what the implementation signature allows. For example, with the below signature and function, only the number call is legal because it's the only provided signature.
+
+    function test(val: number): void;
+    function test(val: number | string): void 
+    {
+    console.log(val);
+    }
+
+TS does code flow analysis, and so it needs to reliably represent functions that will never return. `never` is the type for this.
+
+The main use case for `never` is to account for code paths that can happen in JS and not in TS.
+
+Let's say you have a public API `isNumber` to determine if a string or number is valid and finite:
+
+    function isNumber(val: string | number): boolean
+    {
+        if (typeof val === "string")
+        {
+            return isFinite(parseInt(val,10));
+        }
+        else if (typeof val === "number")
+        {
+            return isFinite(val);
+        }
+    }
+
+In TS it isn't possible to call `isNumber` with anything other than the specified types, but if you are creating a library that can be used for both JS and TS, you might distribute the emitted JS code:
+
+    // JS code for isNumber
+    function isNumber(val)
+    {
+        if (typeof val === "string")
+        {
+            return isFinite(parseInt(val,10));
+        }
+        else if (typeof val === "number")
+        {
+            return isFinite(val);
+        }
+    }
+
+In this case you could call isNumber with any data type, and the result would be undefined. In TS you could also force this, technically, with a variable of type `any`.
+
+Suppose you have a function for throwing an exception:
+
+    function logAndThrowError(message : string): void
+    {
+        console.log("Log: " + message);
+        throw new Error(message);
+    }
+
+You could call this function at the end to throw an error, but there is still a problem, because the compiler sees this as no valid return. Therefore, we would want to make the function type `never` instead of `void`, to show that it never finishes.
+
+    function logAndThrowError(message : string): never
+    {
+        console.log("Log: " + message);
+        throw new Error(message);
+    }
+
+This avoids this message: `Function lacks ending return statement and return type does not include 'undefined'.`
+
+    function isNumber(val: string | number): boolean 
+    {
+    if (typeof val === "string") 
+    {
+        return isFinite(parseInt(val,10));
+    } else if (typeof val === "number") 
+        {
+        return isFinite(val);
+    }
+    logAndThrowError("isNumber only accepts strings and numbers");
+    }
+
+Object Types
+===
+
+An __object type__ is a custom data type that describes an object's "shape". When compared to untyped variables, object types make code easier to read, reuse, and type-safe. Classes are one example of an object type: in TS, we prefer __interfaces__ over classes for efficiency reasons.
+
+Anonymous Object Types vs. Interfaces
+---
+
+To declare an anonymous object type, you describe the object's shape at variable declaration.
+
+    let myEmployee: { name: string, id: number, attendMeeting(location: string): void };
+
+The variable myEmployee can reference only objects with those two properties and that method with matching signature. You can't have extra either.  
+But of course this is not advantageous because it's unnamed, so you must redefine it if you want to use it elsewhere. In which case, it should be declared as an interface instead.
+
+    interface IEmployee
+    {
+        name: string;
+        id: number;
+        attendMeeting(location: string): void;
+    }
+
+You can then declare multiple variables of this type without redefining the object shape each time.
+
+    const emp1 : IEmployee = { name: "Michael", id: 1, attendMeeting(location: string): void {} };
+    const emp2 : IEmployee = { name: "Gob", id: 2, attendMeeting(location: string): void {} };
+
+Optional Properties
+---
+Normally all properties are required: to make a property optional, add a `?` after the property name:
+
+    interface IPerson
+    {
+        name: string;
+        nickname?: string;
+    }
+
+Read-Only Properties
+---
+IF a property is declared as __readonly__, it can't be assigned a value after the object is created. For example:
+
+    interface IPerson
+    {
+        name: string;
+        readonly id: number;
+    }
+
+Index Members
+---
+Interfaces can also contain index members, which represent an arbitrary number of properties with a certain index type and value type. The valueType must be either `string` or `number`, and not union type.
+
+    interface IName
+    {
+        [indexName: indexType ]: valueType;
+    }
+
+    // Eg
+    interface ICoworkerArray
+    {
+        [id: number ]: IEmployee;
+    }
+
+1. Objects may contain any number of properties with the given index type that reference the given value type.
+
+        const coworkers: ICoworkerArray = {
+            A123: { name: "Bob", id: "A123" },
+            B456: { name: "Bill", id: "B456" }
+        };
+
+        coworkers.favoriteCoworker = coworkers.A123;
+
+2. Every property indexed by the given index type must return the corresponding value type.
+
+        // compile error: 5 is not IEmployee
+        const coworkers: ICoworkerArray = { averageTenure : 5 }
+
+        // this is true for the interface definition as well
+
+        interface ICoworkerArray
+        {
+            [id: string ]: IEmployee;
+
+            favoriteCoworker: IEmployee; //OK! indexed by string and returns a string, so it matches the index member
+
+            longestTenure: number;    //compiler error! indexed by string but doesn't return an Employee
+            // you can escape this with union type (IEmployee | number)
+        }
+
+Index properties can also use the readonly keyword: this can be used to make a collection immutable.
+
+    let siblings: { readonly [order: number]: string };
+    siblings = ["Primus", "Secundus", "Tertius", "Quartus", "Quintus", "Sextus"];
+    siblings[1] = "Septimus"; // compiler error
+
+Like function types, index types allow for easier reading and reuse of code. You can declare that a parameter implements an interface with an index, rather than specifying an inline anonymous object type.
+
+Extending One Interface with Another
+---
+
+A new interface may extend multiple existing interfaces. This allows more complex interfaces constructed from component parts.
+
+    interface INamed
+    {
+        name: string;
+    }
+
+    interface IMakesNoise
+    {
+        makeNoise(): void;
+    }
+
+    interface INoisyNamedThing extends INamed, IMakesNoise {}
+
+    const myCat: INoisyNamedThing =
+    {
+        name: "fluffy",
+        makeNoise: () => { console.log("MEOW"); }
+    }
+
+Named Parameters
+---
+Calling code becomes difficult to read when the number of parameters increases, particularly with more optional parameters. It's hard to tell in some cases what each call refers to, and if you want to skip an optional parameter in the middle, you have to explicitly pass `undefined`.
+
+    function createButton(caption: string, autoHide?: boolean, isDefault?: boolean, isCancel?: boolean): void {...}
+
+    // calling code
+    createButton("OK", true, false, false);
+    createButton("Next", undefined, undefined, true);
+
+It's best to group all optional parameters into one optional object type parameter. Even better, create an interface for the parameters.
+
+    // grouped all optional parameters into an "args" object type
+    function createButton(caption: string, args?: {autoHide?: boolean, isDefault?: boolean, isCancel?: boolean}): void {}
+
+    // OR create interface
+    interface ICreateButtonOptArgs
+    {
+        autoHide?: boolean;
+        isDefault?: boolean;
+        isCancel?: boolean;
+    }
+
+    function createButton(caption: string, args?: ICreateButtonOptArgs): void {}
+
+    // calling code
+    createButton("OK", {isCancel: false, autoHide: true, isDefault: false});
+    createButton("Next", {isCancel: true});
+
+Interfaces vs. Type Aliases
+---
+You can technically use a type alias to define an object type, but interfaces are more flexible because they can be extended by other interfaces and implemented by classes. The only time you should consider using a type alias is when naming a union type.
+
+Destructuring an Object
+---
+Destructuring objects can make code easier to read: Instead of accessing properties of an existing object, you can create local variables using an object's properties.
+
+For example, suppose you want to validate the start and end of a numeric range: both numbers should be finite and non-negative, and the start should be less than or equal to the end. With the logic worked out, the function looks like this:
+
+    function isRangeValid(range: {start: number, end: number}): boolean
+    {
+        return range.start >= 0 && isFinite(range.end) && range.start <= range.end;
+    }
+
+This works, but constantly calling the object for properties is redundant and makes the function harder to read. We could use multiple assignments to store values, but destructuring the object can be done in a single line of code with TS.
+
+    function isRangeValid(range: {start: number, end: number}): boolean
+    {
+        const {start, end} = range;
+        return start >= 0 && isFinite(end) && start <= end;
+    }
+
+This maps the properties of `range` to two local variables. The data types are inferred.  
+The names are typically matching property names, but they can be aliased to other names. For example, I could map start to begin and end to fin:
+
+    function isRangeValid(range: {start: number, end: number}): boolean 
+    {
+        const {start: begin, end: fin} = range;
+        return begin >= 0 && isFinite(fin) && begin <= fin;
+    }
+
+Destructuring Arrays is similar, we just use `[]` instead of `{}`. You can even assign the rest of the array to a new array, and you can omit them.
+
+    let myString = "this is a long string thing"
+
+    // simple pull first 3 elements
+    let [word1, word2, word3] = myStr.split(" ");
+
+    // pull first 2, rest in remain
+    let [word1, word2, ...remain] = myStr.split(" ");
+
+    // pull first and last element
+    let [word1, , , , , word6] = myStr.split(" ");
+
+Of course, the whole point of this is readability and ease. If your statement gets too complex it may be easier to just pull values individually. Such as in the last statement:
+
+    let word1 = myStr.split(" ")[0];
+    let word6 = myStr.split(" ")[5];
+
+Classes
+===
+
+Interfaces can define the structure of objects, but if you need to add state and behavior, you can define a *class*. Classes should be in Pascal case.
+
+Access Modifiers
+---
+You know, the usual:
+
+Accessibility                                       | Access Modifier                           | Naming Convention
+-- | -- | --
+Anywhere                                            | `public`                                  | `camelCase`
+Only the class                                      | `private`                                 | `_camelCase`
+The class or derived classes                        | `protected`                               | `camelCase`, or `onCamelCase` if it's an event method to tie to
+Any code from the same project                      | `public` with `@internal` in JSDoc        | `_camelCase`
+The class and derived classes in the same project   | `protected` with `@internal` in JSDoc     | `camelCase`
+
+Things to note:
+1. Default access type in TS is `public`, not `private`
+2. No `internal` modifier, just the JSDoc note.
+
+Fields
+---
+
+Fields in classes are just like variable declarations, just with the `var`/`let` keyword replaced by an access modifier.
+
+    class MyClass
+    {
+        AccessModifier fieldName: Type = initialValue;
+    }
+
+Methods
+---
+
+Behavior is added to a class by defining methods. In TS, methods are declared like fields, but also include a parameter list and a code body, like function definitions:
+
+    class MyClass
+    {
+        AccessModifier methodName(param1: Type1, param2: Type2): ReturnType
+        {
+            // code body, including return if required
+        }
+    }
+
+Properties
+---
+
+Similar to other OOP languages, properties are prevented to consuming code as values, but are actually implemented as methods, with a fixed signature and return type.
+
+    class MyClass
+    {
+        private _backingField: Type;
+
+        AccessModifier get propertyName(): Type
+        {
+            // optional logic
+            return this._backingfield;
+        }
+
+        AccessModifier set propertyName(value: Type)
+        {
+            // optional logic
+            this._backingField = value;
+        }
+    }
+
+In TypeScript, __the getter and setter must have the same access level__. However, you are free to omit either to create read-only/write-only properties.
+
+Write-only properties shouldn't be used, though. Instead, just create a separate setting function that follows what might be a Java-style set method:
+
+    setProperty(value: PropType): void { this._property = value; }
+
+Constructors
+---
+
+    class MyClass
+    {
+        // This function is actually called "constructor"
+        AccessModifier consructor(inputParameters)
+        {
+            // Initialize object based on input
+        }
+    }
+
