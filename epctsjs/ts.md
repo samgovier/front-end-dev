@@ -889,12 +889,18 @@ Write-only properties shouldn't be used, though. Instead, just create a separate
 Constructors
 ---
 
+A constructor must literally be a function named __constructor__.
+
     class MyClass
     {
         // This function is actually called "constructor"
-        AccessModifier consructor(inputParameters)
+        AccessModifier constructor(inputParameters)
         {
             // Initialize object based on input
         }
     }
 
+Default constructor is assumed if you don't define one. As defined, you can't have more than one function with the same name, so you can only have one __constructor__ class, but you can still overload the constructor with multiple signatures. This also means all overloads must have the same AccessModifier, however.
+
+__Private Constructors__ can only be instantiated or extended in its own class, meaning the class can't be inherited. This is similar to sealing in other OOP languages.
+__Protected Constructors__ can only be instantiated in its own class, but can be extended in derived classes.
