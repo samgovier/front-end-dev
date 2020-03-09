@@ -904,3 +904,35 @@ Default constructor is assumed if you don't define one. As defined, you can't ha
 
 __Private Constructors__ can only be instantiated or extended in its own class, meaning the class can't be inherited. This is similar to sealing in other OOP languages.
 __Protected Constructors__ can only be instantiated in its own class, but can be extended in derived classes.
+
+Static Members
+---
+
+Static members of a class are called CLASS members, identified with `static`. Called with class name instead of instance name. Anything `static` related has to be declared, like getters and setters.
+
+Inheritance
+---
+
+Inheritance is similar to other OOP languages.
+
+    class DerivedClass extends BaseClass {}
+
+To override a base-class method, all you need to do is redefine the method. Just remember:
+1. The derived class must have access to the member. This means that private members cannot be overridden.
+2. The new implementation must have an access level that is *the same or more relaxed* than the original.
+3. The new implementation must have the same signature as the original.
+
+You can use __super__ to reference the base class's implementation, eg:
+
+    class DerivedClass extends BaseClass
+    {
+        protected onThisFunction()
+        {
+            // do things maybe
+            super.onThisFunction();
+            // do other things
+        }
+    }
+
+Subclasses
+---
