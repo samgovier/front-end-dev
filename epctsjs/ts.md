@@ -936,3 +936,80 @@ You can use __super__ to reference the base class's implementation, eg:
 
 Subclasses
 ---
+When defining a constructor in a subclass, you must always include a reference to the base class for initializing all the inherited state. Essentially, if you've included a `extends` class, you must include the `super();` keyword in the constructor.
+
+    class SubClass extends BaseClass
+    {
+        constructor(name)
+        {
+            super();
+        }
+    }
+
+Default Field Values and Inheritance
+---
+In TS, default field values are assigned as part of the class constructor, and not inserted directly into the prototype. You don't really see this in the TS but would see in the output JavaScript.  
+This means that when a derived class overrides the default value of a field, the default from the base class will persist until the constructor of the derived class executes. This is a short time, obviously, but important to know.
+
+    // TS
+    class Employee
+    {
+        public wage = 50;
+        public constructor() {}
+        public toString():string { return "Employee"; }
+    }
+
+    // JS
+    var Employee = /** @class */ (function () {
+        function Employee() {
+            this.wage = 50;
+        }
+        Employee.prototype.toString = function () { return "Employee"; };
+        return Employee;
+    }());
+
+Deferring Implementation (Abstract)
+---
+At times you may include a method, but leave it to derived classes to implement. This is done with the `abstract` keyword, on the class and on the function(s). In TS 2.0, properties can also be made abstract, although this should generally be set in an interface.
+
+    abstract class Animal
+    {
+        public abstract makeNoise()
+        {
+            // this is different depending on the animal
+        }
+    }
+
+Interface Implementation
+---
+To implement an interface, use `implements`, like you would in Java. A field in an interface can be implemented as a field or a property, in all it's access types (getters/setters).
+
+    class MyClass implements IInterfaceName {}
+
+When you are writing for getters/setters on an interface, and the interface variable is for an implementing object, the compiling code won't always recognize when an assignment didn't work, even if it's marked as read-only (ie. `var x:IInterfaceName = new MyClass()`) Thus it's important to set readonly for fields in the interface, and since there is no writeonly modifier for fields, writeonly properties should not be used.
+
+Assignment Compatibility
+---
+
+Recall from Object Types, an object literal must exactly match it's assigned type. Classes are permitted to have excess properties beyond what is expected, even if the class doesn't explicitly implement the interface. Eg:
+
+    interface IPerson
+    {
+        name: string;
+    }
+    const myPerson1: IPerson = { name: "Bob", faveColor: "red"}; // Compile error
+
+    class Person
+    {
+        name: string;
+        faveColor?: string;
+        public constructor(name: string, faveColor?: string)
+        {
+            this.name = name;
+            this.faveColor = faveColor;
+        }
+    }
+    const myPerson2: IPerson = new Person("Bob", "red"); // works.... :)
+
+Generics
+===
