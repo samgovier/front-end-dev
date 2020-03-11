@@ -1013,3 +1013,180 @@ Recall from Object Types, an object literal must exactly match it's assigned typ
 
 Generics
 ===
+A *generic* creates a class, interface, or function that works with many different data types by deferring specification of 1+ underlying types until it is declared by the consuming code. This is accompished with *type parameters*, via `Type<typeParam>`. By not specifying an underlying type, generics add flexibility and reusability while still maintaining type safety.
+
+For example, an array declaration must contain the inner value type:
+
+    const stringArray = new Array<string>();
+
+Declaring and Inferring Type Parameters
+---
+
+You can declare generics with a type parameter, typically `<T>`.
+
+    class SimpleSet<T>
+    {
+        private _vals: T[] = [];
+    }
+
+It's also possible to specify multiple type parameters. When doing so it's common to give types a meaningful name in Pascal case, prefixed with "T". (Although in CS 400 you used E, so that should work too).
+
+    class Dictionary<TKey, TValue>
+    {
+        private _vals: TValue[] : [];
+        // Dictionaries are obviously complex so this would take a lot more thought :)
+    }
+
+It's possible to infer type parameters based on types passed in as arguments:
+
+    function countMatches<T>(ary: T[], search: T): number
+    {
+        return ary.filter(val => val === search).length;
+    }
+
+    // these work, even without <T>
+    countMatches([1,2,1],1); // infers number
+    countMatches(["a","b","c"],"b"); // infers string
+    countMatches([1,2,1],"a"); // compile error
+
+Constraining Type Parameters
+---
+
+You can also restrain the type parameter if you need the type to follow a specific interface.
+
+    interface ILengthable
+    {
+        length: number;
+    }
+
+    function loggingIdentity<T extends ILengthable>(arg: T): T
+    {
+        console.log(arg.length);
+        return arg;
+    }
+
+This can lead to some unintuitive scenarios, however, because of duck typing. The type need not explicitly implement the interface, as long as it has the same "shape" (eg. interface requirements). So an array would work for the above example, even though array doesn't explicitly implement my interface `ILengthable`.
+
+Organizing Code: Modules
+===
+
+There are two different ways to organize code in TS: __Modules__, which rely on the underlying filesystem to organize code, and __Namespaces__, which rely on a separate logical structure. Usually, a framework or application will pick one and stick to it.
+
+Modules, generally, are preferred. You can think of a module like a library: a single file that packs up code for reusability. Most modules will contain one or more entities (classes, interfaces, etc.). Having fewer modules makes things easier for consumers since there is less to import. It may improve performance if bundling isn't used, because fewer separate script files need to be sent to the client.  
+You must choose a module system when you use modules. HSW uses the AMD module system.
+
+Creating Modules
+---
+No special syntax is required to identify a TS file as a module, but you do need to make entities in the file publicly available, which is done via the `export` keyword. For example, if we had a `Shapes.ts` file, I would want to export any classes I want to be usable outside the file:
+
+    //Shapes.ts
+
+    export class Shape {}
+    export class Oval extends Shape {}
+    export class Circle extends Oval {}
+
+Each file should have a standard header:
+
+    /** 
+    * @copyright Copyright <first_year>-<last_year> Corporation
+    * @file <brief description of file>
+    * @author <your full name>
+    * @module <@module_name>
+    */
+
+Using Modules
+---
+
+Any exported info can be used with the `import` keyword in other files, and specifying the filepath to `Filename`, relative to the current file. Filepaths are case-sensitive, and refer to emitted JavaScript, though the `.js` extension is omitted.
+
+There are two ways to use `import`:
+
+1. If you only need a few entities, you can list them out and assign aliases as desired:
+
+        import { Oval, Circle as Circ } from "./Shapes";
+
+        // available on their own
+        let myOval = new Oval();
+        let myCirc = new Circ();
+
+2. If you need all of them, you can import them all with a wildcard:
+
+        import * as shps from "./Shapes";
+
+        // available as properties of the imported object
+        let myOval = new shps.Oval();
+        let myCirc = new shps.Circle();
+
+Managing Dependencies
+---
+
+Of course, code that imports modules can also export itself as a module. Importing a class with buried imports won't include the nested imports. We can solve this by either importing any dependencies, or by re-exporting any of its own dependencies. For example:
+
+    import { Shape } from "./Shapes";
+
+    export class McShape
+    {
+        writeShape(shapeToWrite: Shape): void
+        {
+            console.log(shapeToWrite);
+        }
+    }
+
+    // RE-EXPORT
+    export { Shape };
+
+Now we only need one import statement.
+
+    import * as shapies from "./McShape";
+
+    const ms = new shapies.McShape();
+    ms.writeShape(new shapies.Shape());
+
+There aren't strict rules that dictate what a module must contain. Below are some suggestions to aid in code grouping logic and efficiency.
+
+* Each loaded file is an HTTP request, so err on the side of fewer modules. They can always be broken up later.
+* In TS, it's okay to have more than one class in a module.
+* If code is only used in one module, it should be part of that module.
+* If there are clear dependencies and logical groups among code segments, include them in a single module.
+* Entities not needed outside a module shouldn't be exported. This effectively makes them internal to the module.
+
+Organizing Code: Namespaces
+===
+
+While modules are preferred, sometimes namespaces are needed. For example, if you need to import JavaScript data structures into TypeScript. They can be defined as such:
+
+    namespace Epic.Training.Example
+    {
+        // namespace level variable
+        let namespaceSetting: number = 1138;
+    }
+
+Imports and Exports
+---
+
+By default, entities defined within a namespace are only visible within the namespace block itself. If you want to access code from another namespace, you must export it. This is done with the `export` keyword, again, eg:
+
+    namespace Epic.Training.Example
+    {
+        export class MyClass {}
+    }
+
+    namespace Epic.Training.ExampleTwo
+    {
+        class MyClas extends Epic.Training.Example.MyClass {}
+    }
+
+Notice that import isn't required for access. With namespaces, import is only used to *alias* a namespace and give it a shorter name.
+
+    namespace Epic.Training.ExampleTwo
+    {
+        import ete = Epic.Training.Example;
+        class MyClas extends ete.MyClass {}
+    }
+
+Async Programming
+===
+Any action that is initiated now but can't resolve until later is *asynchronous*. This might include:
+* Responding to a UI event, like a button click
+* A web service call
+* A timeout
