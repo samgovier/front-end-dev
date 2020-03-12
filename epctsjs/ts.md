@@ -1340,3 +1340,83 @@ TypeScript introduces some syntactic sugar that makes async code using promises 
     * Since this code block is now waiting on an asynchronous action, *it has become asynchronous itself*.
 4. Wrap the `await` call and all dependent code in a function that is marked as async and returns a promise.
 5. Repeat the previous steps until all async operations are accounted for.
+
+Say we have the following code with a promise:
+
+    function DoAsyncStuff(): Promise<void> {}
+    function DoOtherStuff(): void {}
+    DoAsyncStuff().then(DoOtherStuff);
+
+The first step to allow us to use await is to mark DoAsyncStuff with async.
+
+    async function DoAsyncStuff(): Promise<void> {}
+
+Next use await instead of then to delay DoOtherStuff until DoAsyncStuff resolves:
+
+    async function DoAsyncStuff(): Promise<void> {}
+    function DoOtherStuff(): void {}
+
+    await DoAsyncStuff();
+    DoOtherStuff();
+
+Almost done, but this code currently has a compile error. Everything coming after the await call needs to be delayed and is now asynchronous itself, so it __must__ be contained in an async function. To fix the problem, wrap it in an async method.
+
+    async main(): Promise<void>
+    {
+        await DoAsyncStuff();
+        DoOtherStuff();
+    }
+
+    main();
+
+While in C# we like to be strict about async functions, we are not as strict about TypeScript: the big difference being that if we have a sync and async version of a function, then we should append the end of the function with `Async`.
+
+### Returning a value from async/await
+The initial setup is the same as promises:
+1. Specify the type of the return type in the type parameter
+2. Pass the result to the resolve function.
+
+The big difference is that if you call it directly, the promise is returned instead of the eventual value. If you await the promise, you'll get the value directly.
+
+    let name = await sayHi();
+    await sayBye(name);
+    dontForget();
+
+### Handling errors in async functions
+
+Recall that the goal with async/await is to make async code read more like sync code. Same is true with errors. To catch an error, simply wrap the await in a try/catch.
+
+Async Loading Modules
+---
+
+In the previous imports, modules were loaded statically. This means whenever the script file is loaded, all dependencies are also loaded. This can be wasteful for imports that are rarely used:
+
+    // Statically loaded modules
+    import * as common from "../CommonlyUsedStuff";
+    import * as rare from "../RarelyUsedStuff";
+
+    let isEdgeCase: boolean = common.DoCommonStuff();
+
+    if(isEdgeCase)
+    {
+        rare.DoRareStuff();
+    }
+
+In this case, it would be more efficient to load RarelyUsedStuff dynamically. To do so, use import as a function. Because loading the file in this way is async, import returns a promise and is marked as async.
+
+    // Statically loaded module
+    import * as common from "../CommonlyUsedStuff";
+
+    async main(): Promise<void>
+    {
+        let isEdgeCase: boolean = common.DoCommonStuff();
+
+        if(isEdgeCase)
+        {
+            // Dynamically load module
+            const rare = await import("../RarelyUsedStuff");
+            rare.DoRareStuff();
+        }
+    }
+
+    main();
