@@ -1190,3 +1190,153 @@ Any action that is initiated now but can't resolve until later is *asynchronous*
 * Responding to a UI event, like a button click
 * A web service call
 * A timeout
+
+How the Browser Sequences Asynchronous Actions
+---
+JS in a browser can only have one execution thread at a time. Any async action that is ready to be resolved (eg. a button click event, web service call, timeout) is placed on a queue. Once the current code on the stack has completed, the next action on a queue is handled.
+
+### Adding an Async action to the queue
+The easiest way to add something to the queue is by using setTimeout. If you don't specify a delay, then the task is placed on the queue to be executed as soon as possible. In the below code, the task being placed on the queue happens synchronously, but the actual code doesn't execute until the current task is done. This is what makes it __asynchronous__.
+
+    console.log("Adding task to queue.");
+    var startTime = Date.now();
+    setTimeout(function () { console.log("Milliseconds on queue: " + (Date.now() - startTime)); });
+    console.log("Task added.");
+    console.log("Output:");
+
+    // Example output:
+    // Adding task to queue.
+    // Task added.
+    // Output:
+    // Milliseconds on queue: 13
+
+### Waiting for Async results using Callbacks
+
+The classic way to wait for async results is with a callback. If you need actions to perform in a certain order, you're going to have a problem when you add a function asynchronously. You can augment an async function by specifying a callback, which is only invoked after the async event happens. This ensures order.
+
+    function sayHi(callback: Function): void
+    {
+        setTimeout(() =>
+        {
+            console.log("Hi");
+            callback();
+        });
+    }
+    function sayBye(): void
+    {
+        console.log("Bye");
+    }
+
+    sayHi(sayBye);
+
+However, callback order can obviously get complicated fast, so you must use __promises__ to make it easier to read.
+
+### Waiting for Async results using Promises
+
+A __promise__ represents the eventual result of an async call. You can use it as a placeholder until the result is available, or a failure occurs. If you wrap the async code in a promise, you can delay the dependent code until after the promise resolves. The promise constructor takes a delegate function as input, which is where the async code is kicked off. The delegate function is also passed two arguments whne invoked: the first is called on completion, the second on failure. The convention is to call the first argument *resolve* and the second one *reject*. You use the `then` method to place dependent code, and the `catch` method to execute code if it fails.
+
+    function sayHi(): Promise<void>
+    {
+        return new Promise<void>( (resolve, reject) =>
+        {
+            setTimeout( () =>
+            {
+                try
+                {
+                    //throw new Error("Feeling Grumpy... no talk...");
+                    console.log("Hi");
+                    resolve();
+                }
+                catch(error)
+                {
+                    reject(error);
+                }
+            });
+        });
+    }
+
+    function sayBye(): void
+    {
+        console.log("Bye");
+    }
+
+    function displayError(error: Error): void
+    {
+        console.log(error.message);
+    }
+
+    // the good stuff
+    sayHi().then(sayBye).catch(displayError);
+
+#### Returning Promise Values
+If you need to return a value from a promise, specify the value in the type parameter, pass the return value to the resolve function, and use the output parameter as input in the function specified in `then`.
+
+    function sayHi(): Promise<string>
+    {
+        return new Promise<string>( resolve =>
+        {
+            setTimeout( () =>
+            {
+                console.log("Hi");
+                let name: string = prompt("Name?", "Bobby") || "Bobithy";
+                console.log("My name is " + name);
+                resolve(name);
+            });
+        });
+    }
+
+    function sayBye(name: string): void
+    {
+        console.log("Bye, " + name);
+    }
+
+    sayHi().then(sayBye);
+
+#### Chaining Promise Actions
+If you have multiple async actions to chain together, promises can be chained with multiple `then` statements.
+
+    function sayHi(): Promise<void>
+    {
+        return new Promise<void>( resolve =>
+        {
+            setTimeout( () =>
+            {
+                console.log("Hi");
+                resolve();
+            });
+        });
+    }
+
+    function sayBye(): Promise<void>
+    {
+        return new Promise<void>( resolve =>
+        {
+            setTimeout( () =>
+            {
+                console.log("Bye");
+                resolve();
+            });
+        });
+    }
+
+    function dontForget(): void
+    {
+        console.log("Don't forget to call!");
+    }
+
+    sayHi().then(sayBye).then(dontForget);
+
+Of course, all of this then leads to using async/await in TS.
+
+Using async/await to make Async code easier to follow
+---
+
+TypeScript introduces some syntactic sugar that makes async code using promises look like synchronous code. The goal is to improve readability. Here's the process:
+
+1. Wrap all async operations in functions that return a promise.
+2. Mark those functions with `async`
+3. Use the `await` to pause execution until an async operation finishes. This has two critical implications:
+    * Any code that depends on the async operation can be written after the `await` call. From the perspective of that code, things will happen synchronously.
+    * Since this code block is now waiting on an asynchronous action, *it has become asynchronous itself*.
+4. Wrap the `await` call and all dependent code in a function that is marked as async and returns a promise.
+5. Repeat the previous steps until all async operations are accounted for.
