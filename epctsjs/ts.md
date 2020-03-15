@@ -1,6 +1,6 @@
 Typescript Stuff
 
-JS examples in [epc.ts](../epctsjs/epc.ts)
+TS examples in [epc.ts](../epctsjs/epc.ts)
 
 Typescript Overview
 ===
@@ -22,7 +22,7 @@ But the emitted JS in ECMA 5 would look like this:
 Debugging on the client
 ---
 
-Even though the browser is executin JS, debugging in TS is done when using browser developer tools, like in Chrome.
+Even though the browser is executing JS, debugging in TS is done when using browser developer tools, like in Chrome.
 
 This is done with a `js.map` file, like this one:
 
@@ -85,7 +85,7 @@ The type declaration and initialization are both optional. By default a variable
     let myVar: any; // Type is any explicitly
     let myVar: string; // type is string :)
 
-You can declare types for function variables, params, and return types, and well as fields, properties, and constants.
+You can declare types for function variables, params, and return types, as well as fields, properties, and constants.
 
 Once a type variable has been declared, only values that are *assignment compatible* can be assigned. If an incompatible value is assigned, there will be a compiler error. Although, TypeScript is more permissive than other OOP languages. [Rules.](https://github.com/Microsoft/TypeScript/blob/master/doc/spec.md#3114-assignment-compatibility)
 
