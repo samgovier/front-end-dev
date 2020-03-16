@@ -181,6 +181,8 @@ Instance members accessible to a union type depends on whether the compiler can 
 
 Typescript detects the use of `typeof` and `instanceof` and automatically performs the appropriate type assertion on the tested variable within the following code block. The feature is known as a *type guard* and prevents compile errors because within the block, the compiler knows exactly what data type the variable is, based on the test. The type guard will also ensure you're only accessing members available to the chosen type.
 
+Keep in mind here that `typeof` and `instanceof` have very specific functions. I can't use `instanceof` number, for example, even if it might seem more graceful, because the left side of `instanceof` must be of type `any`, an object type, or a type parameter. Right side must be either `any` or a subtype of the Function interface type. `typeof` is specifically for producing a string.
+
     let test: any = 8;
     if (typeof test === "number")
     {
@@ -246,7 +248,7 @@ If it isn't clear at compile time which type the function will return, the type 
 
 ### User-defined type guards
 
-You can also create specially defined functions as a *user-defined type guard*. This allows for additional type-guard expressions beyond __typeof__ and __instanceof__. This is useful when you have a union type, *any* type, JS objects, and you want to branch based on the variable's characteristics. THe user-defined type guard returns a boolean as `argumentName is SomeType`, indicating the argument matches Some Type. This is a function return type. For example:
+You can also create specially defined functions as a *user-defined type guard*. This allows for additional type-guard expressions beyond __typeof__ and __instanceof__. This is useful when you have a union type, *any* type, JS objects, and you want to branch based on the variable's characteristics. The user-defined type guard returns a boolean as `argumentName is SomeType`, indicating the argument matches Some Type. This is a function return type. For example:
 
     function isStringArray(arg: Object): arg is string[]
     {
