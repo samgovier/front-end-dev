@@ -415,7 +415,7 @@ After declaring the signature, we can only assign a function with a compatible s
     const myAdd: MyMath = function(x: number, y: number) { return x + y; }
     const mySubtract: MyMath = (x: number, y: number) => { return x - y; }
 
-It is not recommended to use an anonymous function signature, because you have to re-declare the entire signature again, which kind of defeats the point.
+It is not recommended to use an anonymous function signature, because you have to re-declare the entire signature again, which kind of defeats the point. Either use a one-time anonymous function, or create a Type-Safe Signature.
 
     // BAD
     const myAdd: (baseVal: number, increment: number) => number;
