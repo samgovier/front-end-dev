@@ -608,14 +608,17 @@ This avoids this message: `Function lacks ending return statement and return typ
 
     function isNumber(val: string | number): boolean 
     {
-    if (typeof val === "string") 
-    {
-        return isFinite(parseInt(val,10));
-    } else if (typeof val === "number") 
+        if (typeof val === "string") 
         {
-        return isFinite(val);
-    }
-    logAndThrowError("isNumber only accepts strings and numbers");
+            return isFinite(parseInt(val,10));
+        }
+        
+        else if (typeof val === "number") 
+        {
+            return isFinite(val);
+        }
+        
+        logAndThrowError("isNumber only accepts strings and numbers");
     }
 
 Object Types
