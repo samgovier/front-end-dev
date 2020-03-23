@@ -670,7 +670,7 @@ IF a property is declared as __readonly__, it can't be assigned a value after th
 
 Index Members
 ---
-Interfaces can also contain index members, which represent an arbitrary number of properties with a certain index type and value type. The valueType must be either `string` or `number`, and not union type.
+Interfaces can also contain index members, which represent an arbitrary number of properties with a certain index type and value type. The index type __must__ be either `string` or `number`, and not union type.
 
     interface IName
     {
@@ -680,7 +680,7 @@ Interfaces can also contain index members, which represent an arbitrary number o
     // Eg
     interface ICoworkerArray
     {
-        [id: number ]: IEmployee;
+        [id: string ]: IEmployee;
     }
 
 1. Objects may contain any number of properties with the given index type that reference the given value type.
