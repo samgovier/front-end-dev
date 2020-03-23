@@ -866,7 +866,7 @@ Behavior is added to a class by defining methods. In TS, methods are declared li
 Properties
 ---
 
-Similar to other OOP languages, properties are prevented to consuming code as values, but are actually implemented as methods, with a fixed signature and return type.
+Similar to other OOP languages, properties are presented to consuming code as values, but are actually implemented as methods, with a fixed signature and return type.
 
     class MyClass
     {
@@ -941,7 +941,7 @@ You can use __super__ to reference the base class's implementation, eg:
 
 Subclasses
 ---
-When defining a constructor in a subclass, you must always include a reference to the base class for initializing all the inherited state. Essentially, if you've included a `extends` class, you must include the `super();` keyword in the constructor.
+When defining a constructor in a subclass, you must always include a reference to the base class for initializing all the inherited state. Essentially, if you've included an `extends` class, you must include the `super();` keyword in the constructor.
 
     class SubClass extends BaseClass
     {
