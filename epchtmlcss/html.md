@@ -93,3 +93,62 @@ Example:
 So you must have a document type, the html element, containing a head and body, and the head must have a title.
 
 `html` tag - Root of all HTML documents. All other elements are contained in it. Placed just after the document type declaration.
+
+`head` tag - Defines the header portion of the document. Contains information about the document that's not part of the actual content. Must include the `title` element.
+
+`meta` tag - Provides additional information about the document: this would come first in the header, and identifies content type and character set.
+* `http-equiv="text"` indicates what will be described in the content attribute
+* `content="text"` required, specifies the value of the meta element.
+
+Eg:
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+`title` tag - required element of the header. Should be clear and descriptive. This is typically displayed in the browser tab.
+
+`body` tag - Contains the document's content, which will be displayed visually.
+
+`p` tag - Denotes a paragraph. May contain text and inline elements- not other block elements.
+
+Comments
+---
+
+    <!-- Comment -->
+
+__Element Types__
+---
+
+*Block Elements* - items that are followed by a line break, may contain text, other block elements, inline elements. Most are containers for other elements. This includes: `p, h1, h2, ol, ul, blockquote, table, div`
+
+*Inline Elements* - exist inline with text, must be contained in a block element, may only contain text or other inline elements. No implied line breaks before or after. Includes: `br, em, strong, a, img, span`
+
+Block Element Examples
+---
+
+`h#` tag - in the body, specifies a heading that briefly describes the section that follows. 1 is the biggest, 6 is the smallest. They should appear in order.
+
+
+`blockquote` tag - Enclosed text is a quote block with 1+ paragraphs. Requires at least one block element. The block may be rendered indented.
+* you can add `cite="URL"` that sources the quote, not visible
+
+`br` tag - inserts a line break. Always an empty element: `<br />`
+
+`em` tag - emphasized text. Usually renders in italics.
+
+`strong` tag - strongly emphasized text. Usually renders in bold.
+
+Generic Elements
+---
+
+These elements don't have any intrinsic styling or meaning associated with them, they're just used to mark sections of content to either style them with CSS or manipulate them with JavaScript.
+
+`div` tag - generic __block__ element
+
+`span` tag - generic __inline__ element
+
+Attributes - these attributes are common to all elements.  
+* `id` - Assigns a unique identifying name to the element. Must be unique among all IDs in a document. Can be used to select specific elements to style.
+* `class` - Assigns one or more classification names to the element separated by spaces, elements in *. Can be used to apply the same style to multiple elements.
+
+Special Characters
+===
