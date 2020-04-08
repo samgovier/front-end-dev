@@ -152,3 +152,41 @@ Attributes - these attributes are common to all elements.
 
 Special Characters
 ===
+
+Certain characters cannot be directly written because they have special meaning in HTML syntax. These characters need to be properly escaped to be safely included in content. Other characters have special behavior or a special glyph.
+
+Escape Characters
+---
+
+To display the following characters, use the following HTML code.
+
+| Character  | Code     |
+|-|-|
+| <          | `&lt;`   |
+| >          | `&gt;`   |
+| &          | `&amp;`  |
+| "          | `&quot;` |
+| ©          | `&copy;` |
+| space (no break) | `&nbsp;` |
+
+Numeric Character Reference (NCR)
+---
+Characters can also be inserted using the hexadecimal number from the character-set table.
+* `&#xhhhh;` where hhhh is the hexadecimal equivalent of the character
+    * `&#x20;` is a space
+    * `&#x27;` is an apostrophe
+
+Hyperlinks
+===
+`a` is for anchor. This is used for creating hyperlinks.
+
+Attributes:
+* `href="URL"` - specifies the destination URL
+* `title="text"` - textual description of destination: displayed as a tooltip and can be read by screen readers.
+* `id="name"` - create a named anchor that is used in a URL, docname#idName or just #idName in same document
+* `target="text"` - specifies the name of the window where the target document should be displayed. "_blank" opens a new browser window (not valid on strict XHTML)
+
+Link lables should be kept concise and meaningful. Titles should provide more information.
+
+Images
+===
