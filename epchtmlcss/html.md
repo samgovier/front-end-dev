@@ -190,3 +190,47 @@ Link lables should be kept concise and meaningful. Titles should provide more in
 
 Images
 ===
+
+`img` tag Places an image on the page. Images are retrieved after the page is retrieved, and is always an empty element.
+
+Attributes:
+* `src="text"` - required, location of the graphic file to be displayed
+* `title="text"` - for image tool-tip
+* `alt="text"` - required, string of alternate text that appears when image is not displayed
+* `height="#"` - specifies the height of the image in pixels, strongly recommended to speed up web page rendering
+* `width="#"` - specifies the width of the image in pixels, strongly recommended to speed up web page rendering
+
+Alternate text:
+* Alternate text is read by screen readers.
+* Communicate purpose of the graphic accurately and succinctly, *not* its appearance
+* Use empty text for graphics that do not convey meaning
+* Do not repeat adjacent text in alternate text
+* Text can match text in graphic if this gives meaning
+* Do not use "image of..." or "graphic of..."
+* If image is a link, describe function of link, without "link to..." or "click to..."
+
+Terms
+---
+__Lossless data compression__ = reduce the file size without degrading visual quality  
+__Lossy data compression__ = reduce file size while degrading visual quality  
+__Alpha Blending__ = process of combining an image with a background to create the appearance of partial transparency  
+__Dithering__ = technique to create illusion of color depth with a limited color palette, colors not available are created by combining colors
+* If limited color palette used image might appear grainy or speckled. several algorithms exist to perform dithering
+
+Formats
+---
+__JPEG (Joint Photographic Experts Group)__ = Good for digital photos and complex graphics. Lots of colors, lossy format, no transparency, levels of compression determine quality  
+__GIF (Graphics Interchange Format)__ = 8-bit-per-pixel bitmap image format, uses only 256 colors. Good for simple straight-edged logos and shapes with solid colors, lossless data compression, allows transparency on a per pixel basis - either on or off, uses dithering to improve image  
+__PNG  (Portable Network Graphic)__ = Created to improve on and replace GIF. Lossless data compression, supports 24-bit color palettes, (or 8-bit which is same as GIF), allows alpha blending transparency, good for smooth lines
+
+Lists
+===
+
+Two types used to group items into lists, made of one or more "list items".
+
+* `ol` tag - an ordered (numbered) list
+* `ul` tag - an unordered (bulleted) list
+* `li` tag - what you put in the list. Contains text, inline elements, block elements
+
+Tables
+===
