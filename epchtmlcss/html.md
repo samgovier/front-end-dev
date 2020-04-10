@@ -234,3 +234,129 @@ Two types used to group items into lists, made of one or more "list items".
 
 Tables
 ===
+Tables are good for relationships in 2 or more dimensions, or a *data table*.  
+Tables may also be used to algin form elements, or a *layout table*.
+
+Tags are `table`, `tr` for table row, and `td` for table data.
+
+* `table` tag, includes attribute: `summary="text"`, which provides an overview of table contents and can be screen read
+* `caption` tab provides a summary of contents or purpose.
+    * Must immediately follow the table start tag
+    * Acts as a heading for the table
+    * Useful on data tables to provide a table name
+* `tr` tag - table row, contains no content other than table cells
+* `td` tag - table data, which may contain any content
+    * `colspan="#"` - specifies the number of columns to span
+    * `rowspan="#'` - specifies the number of rows to span
+    * `id="uniqueID"` - unique identifying name
+    * `header="id references"` - lists header cells by id that provide header information for current cell
+* `th` tag - header cell, provides important information on data tables
+    * same attributes as data cells, plus
+    * `scope="row/col/rowgroup/colgroup"` - specifies that a `th` element is a header for one or more rows or columns. Used by screen readers.
+
+Use `id` with `headers` only when more than one column and one row header is needed to identify a cell header. Use `scope` when only one column and/or row header is needed to identify a cell header.
+
+Forms
+===
+Form tags are used for data entry and input controls:
+* `label` for a text label
+* `input` for an area for text/option input
+* `textarea` for a text box area
+* `fieldset`/`legend`for focus boxes
+* `select` / `option` for dropdown
+
+Attributes make elements behave or render differently, eg. `input` can be a textbox, button, checkbox, or more.  
+See below for example (rendered in actual HTML!)
+
+
+<h1>Example Form</h1>
+<form action="">
+    <label for="txt1">Input text:</label>
+    <input id="txt1" type="text" />
+    <br />
+    <label for="secret">Password input:</label>
+    <input id="secret" type="password" />
+    <br />
+    <label for="txtarea">Text area:</label>
+    <textarea id="txtarea" cols="20" rows="2"></textarea>
+    <br />
+    <br />
+    <input id="chk1" type="checkbox" />
+    <label for="chk1">Input check box 1</label>
+    <br />
+    <input id="chk2" type="checkbox" />
+    <label for="chk2">Input check box 2</label>
+    <br />
+    <input id="chk3" type="checkbox" />
+    <label for="chk3">Input check box 3</label>
+    <br />
+    <br />
+    <fieldset>
+        <legend>Radio buttons</legend>
+        <input id="opt1" type="radio" name="opt" value="1" />
+        <label for="opt1">Option 1</label>
+        <br />
+        <input id="opt2" type="radio" name="opt" value="2" />
+        <label for="opt2">Option 2</label>
+        <br />
+        <input id="opt3" type="radio" name="opt" value="3" />
+        <label for="opt3">Option 3</label>
+    </fieldset>
+    <br />
+    <label for="choice">Select:</label>
+    <select id="choice">
+        <option value="1">Option 1</option>
+        <option value="2">Option 2</option>
+        <option value="3">Option 3</option>
+    </select>
+    <br />
+    <br />
+    <input id="btn1" type="button" value="My Button" />
+    <input id="btn3" type="reset" value="Reset" />
+</form>
+
+    <h1>Example Form</h1>
+    <form action="">
+        <label for="txt1">Input text:</label>
+        <input id="txt1" type="text" />
+        <br />
+        <label for="secret">Password input:</label>
+        <input id="secret" type="password" />
+        <br />
+        <label for="txtarea">Text area:</label>
+        <textarea id="txtarea" cols="20" rows="2"></textarea>
+        <br />
+        <br />
+        <input id="chk1" type="checkbox" />
+        <label for="chk1">Input check box 1</label>
+        <br />
+        <input id="chk2" type="checkbox" />
+        <label for="chk2">Input check box 2</label>
+        <br />
+        <input id="chk3" type="checkbox" />
+        <label for="chk3">Input check box 3</label>
+        <br />
+        <br />
+        <fieldset>
+            <legend>Radio buttons</legend>
+            <input id="opt1" type="radio" name="opt" value="1" />
+            <label for="opt1">Option 1</label>
+            <br />
+            <input id="opt2" type="radio" name="opt" value="2" />
+            <label for="opt2">Option 2</label>
+            <br />
+            <input id="opt3" type="radio" name="opt" value="3" />
+            <label for="opt3">Option 3</label>
+        </fieldset>
+        <br />
+        <label for="choice">Select:</label>
+        <select id="choice">
+            <option value="1">Option 1</option>
+            <option value="2">Option 2</option>
+            <option value="3">Option 3</option>
+        </select>
+        <br />
+        <br />
+        <input id="btn1" type="button" value="My Button" />
+        <input id="btn3" type="reset" value="Reset" />
+    </form>
