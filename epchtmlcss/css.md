@@ -102,7 +102,7 @@ HTML:
         </p>
     </body>
 
-style1.css
+https://training.com/styles/style1.css
 
     h1
     {
