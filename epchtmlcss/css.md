@@ -116,3 +116,15 @@ https://training.com/styles/style1.css
 
 Creating Style Sheets
 ===
+
+A CSS file consists of one or more rules and optional comment blocks. Comments appear between `/* and */`, like in C#.
+
+A rule consists of one or more selectors separated by commas, followed by a declaration block containing properties and values. The syntax of a rule is:
+
+    selector1, selector2, ...
+    {
+        property1: value1;
+        property2: value2;
+    }
+
+The listed properties are applied to any selected element.
