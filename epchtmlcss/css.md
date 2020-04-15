@@ -128,3 +128,55 @@ A rule consists of one or more selectors separated by commas, followed by a decl
     }
 
 The listed properties are applied to any selected element.
+
+Selectors
+===
+Used to indicate which elements this style applies to.
+
+Element Selectors
+---
+
+| Selector | Meaning |
+|-|-|
+|`*`                    | All Elements selected (default values of the style) |
+|`Element1`             | Name of element, such as `h1` or `p`|
+|`#idname`              | The element that has `id="idname"`|
+|`.classname`           | All elements with `class="classname"`|
+|`Element1.classname`   | The element of type `element1` with a class that includes `classname` |
+|`Element1#idname`      | The element of type `element1` with id `idname`. Not generally needed |
+
+Combinators
+---
+
+For the following selectors, `Selector#` may be an element, class, or id
+
+| Selector | Meaning |
+|-|-|
+| `Selector1 Selector2` | Selector2, if it is a descendant of Selector1 |
+| `Selector1 > Selector2` | Selector2, if it is a child of Selector1 |
+| `Selector1 + Selector2` | Selector2, only if it immediately follows Selector1, and both are children of the same parent |
+| `Selector1 ~ Selector2` | Selector2, if it is a later sibling of Selector1 |
+
+Attribute Selectors
+---
+
+Attribute selectors select elements with any or a specific value for certain attributes:
+
+| Selector | Meaning |
+|-|-|
+| `[attribute]` | Selects all elements where the specified attribute has been set to any value. |
+| `[attribute=value]` | Selects all elements where the specified attribute has been set to exactly `value`. |
+| `[attribute~=value]` | Selects all elements where the specified attribute value is a whitespace-separated list of words, one of which is exactly `value`. |
+| `[attribute^=value]` | Selects all elements where the specified attribute value begins with `value`. |
+| `[attribute$=value]` | Selects all elements where the specified attribute value ends with `value`. |
+| `[attribute*=value]` | Selects all elements where the specified attribute contains `value`. |
+
+This can be used with any element, but it is particularly useful for form input elements, since they are distinguished by the `type` attribute. For example, you can set a uniform width to all `input` elements of type `text`:
+
+    input[type=text]
+    {
+        width: 500px;
+    }
+
+Properties
+===
