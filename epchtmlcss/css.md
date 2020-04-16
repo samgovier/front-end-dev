@@ -180,3 +180,33 @@ This can be used with any element, but it is particularly useful for form input 
 
 Properties
 ===
+Properties define possible legal values, initial value, what elements it applies to and if the property is inherited.
+
+Types of Values
+---
+* Keywords - defined on a per-property basis
+* Color - 17 predefined names, hexadecimal `#RRGGBB`, or `rgb(#,#,#)`
+* URL - `url(address)`
+* Numbers - any valid number. Typically property restricted, and sometimes qualified with `px`, `%`, or `em`
+    * `px` = number of pixels, eg. `10px`
+    * `%` = percentage, computed relative to something else, eg. `120%`
+    * `em` = size relative to font size
+
+Colors
+---
+* Careful of hard-coding colors, because they won't change with customization.
+* `#RRGGBB` = The hexadecmial equivalent to amount of red, green, blue from 00-FF (0-255 in decimal)  
+0123456789ABCDEF
+* Picking a Color:
+    * Follow color standards for your application
+    * [Follow web standards](https://en.wikipedia.org/wiki/Web_colors)
+    * Use color schemes from other sources (eg. [Adobe](http://kuler.adobe.com/))
+    * Pick colors from a web page. Eg. Internet Explorer > Dev Tools F12 > Tools > Show Color Picker
+    * Use Web or Windows (eg. Paint) tools to find colors in decimal. If you get a number in decimal it can be converted to hexadecimal.
+
+Style Precedence
+===
+
+Resolving Conflicting Styles
+---
+Multiple style sheets and specifications may be linked in to document. Conflicts are resolved using the cascade, via *specificity* and *inheritance*.
