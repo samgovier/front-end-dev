@@ -1,0 +1,54 @@
+<!DOCTYPE  html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Cascading Styles</title>
+    <link rel="stylesheet" type="text/css" href="style2.css" media="all" />
+    <style type="text/css">
+        /*<![CDATA[*/
+        #special
+        {
+            color: #A32220; /* burgundy */
+        }
+        .warning
+        {
+            color: red;
+            background-color: yellow;
+        }
+        .important
+        {
+            color: black;
+        }
+        p
+        {
+            color: #362923; /* dark brown */
+            background-color: #D4C078; /* light brown */
+        }
+        body
+        {
+            color: black;
+            background-color: #FFF5B2; /* tan */
+        }
+        /*]]>*/
+    </style>
+</head>
+<body>
+    <h1>A heading</h1>
+    <h2>A second heading</h2>
+    <p>
+        a normal paragraph
+    </p>
+    <p class="warning">
+        warning paragraph
+    </p>
+    <p id="special">
+        my special paragraph
+    </p>
+    <p style="color: black;">
+        inline style paragraph
+    </p>
+    <p class="warning important">
+        important warning
+    </p>
+</body>
+</html>

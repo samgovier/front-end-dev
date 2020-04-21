@@ -210,3 +210,61 @@ Style Precedence
 Resolving Conflicting Styles
 ---
 Multiple style sheets and specifications may be linked in to document. Conflicts are resolved using the cascade, via *specificity* and *inheritance*.
+
+Calculating Specificity
+---
+Describes the weight of a selector and associated styles. Takes four numbers in the following order:
+1. Is it a style attribute? One point, no other points assigned.
+2. Does the selector have ids? One point each.
+3. Does the selector have any classes, pseudo-classes or attribute selectors? One point each.
+4. Does the selector have any element names? One point each.
+
+Each piece of the score is evaluated in order with the style selector having the highest precedence and the element names the lowest.
+
+Here's a list of scores from least to most specific:
+| Selector | Specificity |
+|-|-|
+|`Element1` | 0,0,0,1 |
+|`Element1 Element2` | 0,0,0,2 |
+| `.classname` | 0,0,1,0 |
+| `Element:hover` | 0,0,1,1 |
+| `Element1.classname` | 0,0,1,1 |
+| `Element:hover[title=example]` | 0,0,2,1 |
+| `element1#idname` | 0,1,0,1 |
+| `style="..."` | 1,0,0,0 |
+
+Inheritance
+---
+Elements in a document form a tree: `html` is the root. Style applied to an element is inherited by descendants unless the property is not inherited.
+
+Cascade
+---
+Cascade is used to resolve conflicts in styles. Ignores author vs. reader vs. browser rules.
+
+### The Cascade Algorithm
+1. Gather all style sheets together, combine styles from all linked style sheets, embedded styles, and inline styles
+2. For each property, find all declarations that match
+    * Do any selectors select element? If yes, stop looking for declarations
+    * If no selectors, use inheritance to find declarations
+    * If not inherited, use browser default
+3. Sort the declarations by how specific they are using specificity numbers
+    * Rules marked with !important are more specific
+4. Sort any conflicting rules in the order they appear in their individual style sheets. Rules listed later are more important.
+
+Examples:  
+[style2.css](style2.css)
+
+[cascade.html](cascade.html)
+
+Tools
+---
+
+The following IE and Chrome Developer Toolbars are particularly useful debugging CSS problems resulting from conflicting styles.
+1. Open developer tools using the __F12__ key.
+2. Select the DOM Elements (IE) or Elements (Chrome) tab
+3. Navigate to the element you're interested in, or right-click on the page and choose "Inspect"
+4. Inspect or modify the styles from the __Styles__ sub-tab.
+5. Determine which styles were overridden using the __Computed__ sub-tab.
+
+Font Properties
+===
