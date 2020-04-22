@@ -252,8 +252,7 @@ Cascade is used to resolve conflicts in styles. Ignores author vs. reader vs. br
 4. Sort any conflicting rules in the order they appear in their individual style sheets. Rules listed later are more important.
 
 Examples:  
-[style2.css](style2.css)
-
+[style2.css](style2.css)  
 [cascade.html](cascade.html)
 
 Tools
@@ -267,4 +266,121 @@ The following IE and Chrome Developer Toolbars are particularly useful debugging
 5. Determine which styles were overridden using the __Computed__ sub-tab.
 
 Font Properties
+===
+
+font-family
+---
+
+* Either a specific font or family of fonts may be specified.
+* There are 5 families: sans-serif, serif, monospace, cursive, fantasy.
+* The font must exist on the machine to be used.
+* May specify multiple fonts in the order to be tried
+* Use quotes around font names that contain spaces
+
+Eg.
+
+    body
+    {
+        font-family: Verdana, Arial, sans-serif;
+    }
+    .code
+    {
+        font-family: "Courier New", monospace;
+    }
+
+font-size
+---
+
+* Value is keyword, percentage or absolute pixels
+* Keywords: xx-small, x-small, xmall, medium, large, x-large, xx-large
+* Recommended: choose a keyword for the body and use percentages to make other texts relative to that size
+    * Allows users to resize text
+
+Eg.
+
+    body
+    {
+        font-size: small;
+    }
+    h1
+    {
+        font-size: 150%;
+    }
+    h2
+    {
+        font-size: 120%;
+    }
+
+color
+---
+Sets the foreground color of an element: also applies to border or element
+
+    h2
+    {
+        color: navy;
+    }
+
+font-weight
+---
+Determines the boldness of the text: keywords are normal, bold, bolder, lighter
+
+    .enterdata
+    {
+        font-weight: bold;
+    }
+
+font-style
+---
+Determines the style of the text: keywords are italic, oblique, normal. Users may not be able to tell the difference between italic and oblique
+
+    .prompt
+    {
+        font-style: italic;
+    }
+
+text-decoration
+---
+Determines the decoration of the text. Keywords are underline, overline, line-through
+
+    .under
+    {
+        text-decoration: underline;
+    }
+
+text-align
+---
+Sets horizontal alignment of text within a block-level element. Keywords are left, center, right
+
+    .right
+    {
+        text-align: right;
+    }
+
+text-indent
+---
+Sets indentation of the first line of content in a block-level element. Value is percentage or absolute pixels
+
+    .indent
+    {
+        text-indent: 20px;
+    }
+
+white-space
+---
+Declares how white space within an element is handled during layout:
+* normal reduces any sequence of whitespace to a single space
+* nowrap prevents an element from line-breaking
+
+Eg.
+
+    .normal
+    {
+        white-space: normal;
+    }
+
+Examples:  
+[style3.css](style3.css)  
+[fonts.html](fonts.html)
+
+Box Model
 ===
