@@ -384,3 +384,54 @@ Examples:
 
 Box Model
 ===
+
+Block-level elements
+---
+* Generate an element box that fills parent element's content area
+* No elements to sides
+* Line breaks before and after the element box
+
+Inline-level element
+---
+* Generate an element box within a line of text
+* Doesn't break the flow of the line
+
+Block-level Layout
+---
+![Illustration of Block-level Layout](BlockLayout.png)
+
+* Background extends to outer edge of border, filling content, padding, border areas
+* Margins are transparent
+* Only margins, height, width properties can be auto
+* Only margins can be negative
+* Padding defaults to zero
+* Border defaults to none
+* Total width: left margin + left border width + left padding + width + right padding + right border width + right margin
+* Total height: top margin + top border width + top padding + height + bottom padding + bottom border width + bottom margin
+
+Inline-level Layout
+---
+![Illustration of Inline-level Layout](InlineLayout.png)
+
+* line height: leading + content
+* Leading is the difference between line-height and font-size
+* Line box extends from highest inline box to lowest inline box for a line
+
+Margins
+---
+![Illustration of Margin Layout](Margins.png)
+
+* With adjacent inline elements, the margins are added.
+* With stacked block elements, margin is collapsed to larger margin.
+
+line-height
+---
+* Used in determining the layout of inline boxes
+* Value is number or percentage of font-size
+
+Examples:  
+[style4.css](style4.css)  
+[lineheight.html](lineheight.html)
+
+Background
+===
