@@ -435,3 +435,53 @@ Examples:
 
 Background
 ===
+
+For Background, no properties are inherited.
+
+background-color
+---
+Value is a color or keyword transparent: color fills the content, padding, and border area of an element.
+
+    p
+    {
+        background-color: white;
+    }
+
+background-image
+---
+Place an image in the background of element. Value is a URL or keyword `none`. Don't put images that provide meaning in the background because there is no alt text.
+
+    body
+    {
+        background-image: url(./images/cathole.jpg);
+    }
+
+background-repeat
+---
+Define the tiling pattern for the background image: repeat, repeat-x, repeat-y, no-repeat
+
+    body
+    {
+        background-repeat: repeat;
+    }
+
+background-position
+---
+
+* How the background image is positioned within the element.
+* Value is keyword or exact horizontal and vertical position.
+* Keywords: `bottom`, `center`, `left`, `right`, `top`
+
+Eg.
+
+    body
+    {
+        background-position: 10px 10px;
+    }
+
+Example:  
+[style5.css](style5.css)  
+[background.html](background.html)  
+
+Layout Properties
+===
