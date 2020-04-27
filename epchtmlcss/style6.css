@@ -1,0 +1,70 @@
+#blue
+{
+    color: white;
+    background-color: blue;
+    width: 75px;
+    padding-top: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    border-top-width: thick;
+    border-right-width: thick;
+    border-bottom-width: thick;
+    border-left-width: thick;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    border-top-color: yellow;
+    border-right-color: yellow;
+    border-bottom-color: yellow;
+    border-left-color: yellow;
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-bottom: 50px;
+    margin-left: 10px;
+}
+#red
+{
+    background-color: red;
+    width: 100px;
+    height: 100px;
+    padding-top: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    border-top-width: thin;
+    border-right-width: thin;
+    border-bottom-width: thin;
+    border-left-width: thin;
+    border-top-style: dotted;
+    border-right-style: dotted;
+    border-bottom-style: dotted;
+    border-left-style: dotted;
+    border-top-color: black;
+    border-right-color: black;
+    border-bottom-color: black;
+    border-left-color: black;
+    margin-top: 10px;
+    margin-right: 20px;
+    margin-bottom: 50px;
+    margin-left: 25px;
+}
+#yellow
+{
+    background-color: yellow;
+    width: 120px;
+    height: 75px;
+    padding-top: 30px;
+    padding-right: 30px;
+    padding-bottom: 30px;
+    padding-left: 30px;
+    border-top-style: double;
+    border-right-style: double;
+    border-bottom-style: double;
+    border-left-style: double;
+    margin-top: 10px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    margin-left: 50px;
+}

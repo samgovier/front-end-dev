@@ -485,3 +485,115 @@ Example:
 
 Layout Properties
 ===
+None of these properties are inherited.
+
+width
+--
+Defines the width of element's content area. Value is a number of pixels, percentage of containing block, or keyword auto. Auto by default
+
+    #id
+    {
+        width: 100px;
+    }
+
+height
+---
+Defines the height of the element's content area. Value is a number of pixels, percentage of containing block, or keyword auto. Auto by default
+
+    #id
+    {
+        height: 100px;
+    }
+
+Padding
+---
+May specify different size padding on each side of content
+* padding-top
+* padding-right
+* padding-bottom
+* padding-left
+
+Value is a number in pixels or a percentage of containing block
+
+    #id
+    {
+        padding-top: 20px;
+        padding-right: 20px;
+        padding-bottom: 20px;
+        padding-left: 20px;
+    }
+
+Border Width
+---
+May specify different width on each side of content. Sets the width for border of an element
+* border-top-width
+* border-right-width
+* border-bottom-width
+* border-left-width
+
+Takes effect if the border style is not none. Value is number of pixels or keywords: thin, medium, thick
+
+    #id
+    {
+        border-top-width: thick;
+        border-right-width: thick;
+        border-bottom-width: thick;
+        border-left-width: thick;
+    }
+
+Border Style
+--
+May specify different style on each side of content. Defines the style for border of element
+* border-top-style
+* border-right-style
+* border-bottom-style
+* border-left-style
+
+May render slightly different with different browsers. Keywords are `none`, `hidden`, `dotted`, `dashed`, `solid`, `double`
+
+    #id
+    {
+        border-top-style: solid;
+        border-right-style: solid;
+        border-bottom-style: solid;
+        border-left-style: solid;
+    }
+
+Border Color
+---
+May specify different color on each side of content. Sets color for visible border
+* border-top-color
+* border-right-color
+* border-bottom-color
+* border-left-color
+
+May be a color or keyword transparent. Color property of element by default
+
+    #id
+    {
+        border-top-color: yellow;
+        border-right-color: yellow;
+        border-bottom-color: yellow;
+        border-left-color: yellow;
+    }
+
+Margin
+---
+May specify different size margin on each side of content
+* margin-top
+* margin-right
+* margin-bottom
+* margin-left
+
+Value is a number of pixels, percentage of containing block, or keyword `auto`
+
+    #id
+    {
+        margin-top: 10px;
+        margin-right: 10px;
+        margin-bottom: 50px;
+        margin-left: 10px;
+    }
+
+Shortcuts
+===
