@@ -1,0 +1,27 @@
+#blue
+{
+    color: white;
+    background-color: blue;
+    width: 75px;
+    padding: 20px;
+    border: yellow solid thick;
+    margin: 10px 10px 50px 10px;
+}
+#red
+{
+    background-color: red;
+    width: 100px;
+    height: 100px;
+    padding: 20px;
+    border: black dotted thin;
+    margin: 10px 20px 50px 25px;
+}
+#yellow
+{
+    background-color: yellow;
+    width: 120px;
+    height: 75px;
+    padding: 30px;
+    border-style: double;
+    margin: 10px 20px 10px 50px;
+}

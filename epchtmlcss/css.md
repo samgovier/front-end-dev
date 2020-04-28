@@ -595,5 +595,117 @@ Value is a number of pixels, percentage of containing block, or keyword `auto`
         margin-left: 10px;
     }
 
+Example:  
+[style6.css](style6.css)  
+[layout.html](layout.html)  
+
 Shortcuts
+===
+* Use when specifying more than one related property
+* If specifying only one property, spell it out plz
+* Properties not specified take on default values or become none
+
+Background Shortcuts
+---
+Single rule for background properties: give value to `color`, `image`, `repeat`, `position`. Sets value to default if not explicitly declared.
+
+    /* before */
+    body
+    {
+        background-image: url(cathole.JPG);
+        background-repeat: repeat;
+    }
+
+    /* after */
+    body
+    {
+        background: url(cathole.JPG) repeat;
+    }
+
+Padding Shortcuts
+---
+Single rule for size of padding overall or on each side. Specify:
+* single value for all sides
+* List in order of top, right, bottom, left (clockwise)
+* First value for top and bottom, second value for right and left
+
+Examples (all the same):
+
+    #id
+    {
+        padding: 20px 20px 20px 20px;
+    }
+
+    #id
+    {
+        padding: 20px 20px;
+    }
+
+    #id
+    {
+        padding: 20px;
+    }
+
+Border Shortcuts
+---
+### Property Based
+* `border-color`: Single rule for color of border overall or on each side
+* `border-style`: Single rule for style of border overall or on each side
+* `border-width`: Single rule for width of border overall or on each side
+* Single value for all sides, list order of top, right, bottom, left (clockwise), or first value is top/bottom, second is left/right
+
+Eg.
+
+    #id
+    {
+        border-color: yellow;
+        border-style: solid;
+        border-width: thick;
+    }
+
+### Location Based
+* `border-top`: Sets the width, style, color of top border
+* `border-right`: Sets the width, style, color of right border
+* `border-bottom`: Sets the width, style, color of bottom border
+* `border-left`: Sets the width, style, color of left border
+
+Eg.
+
+    #id
+    {
+        border-top: yellow solid thick;
+    }
+
+### All Borders
+`border` alone sets the style, width, and color of overall border. Sets value to default if not explicitly declared.
+
+    #id
+    {
+        border: yellow solid thick;
+    }
+
+Margin Shortcuts
+---
+Single rule for size of margin overall or on each side. Same clockwise rules: all the below are the same.
+
+    #id
+    {
+        margin: 20px 20px 20px 20px;
+    }
+
+    #id
+    {
+        margin: 20px 20px;
+    }
+
+    #id
+    {
+        margin: 20px;
+    }
+
+Example:  
+[style8.css](style8.css)  
+[Shortcuts.html](Shortcuts.html)  
+
+Pseudo-classes & Hyperlinks
 ===
