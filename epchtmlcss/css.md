@@ -709,3 +709,33 @@ Example:
 
 Pseudo-classes & Hyperlinks
 ===
+
+A CSS pseudo-class is a keyword added to selectors that specifies a special state of the element to be selected. For example :hover will apply when the user hovers over the element specified by the selector
+* Acts like a class but isn't really
+* Browser adds & removes pseudo classes automatically
+* May be styled like other classes
+
+__DON'T USE HOVER PSEUDO-SELECTORS WITH SIBLING SELECTORS.__ This causes performance issues with for the entire web page.
+
+Syntax
+---
+
+    selector:pseudo-class {...}
+
+Hyperlinks
+---
+
+* States: unvisited, visited, hover
+* Corresponding pseudo-classes: link, visited, hover
+* Pseudo-classes for keyboard access to a hyperlink
+    * active (when clicking)
+    * focus (when it has focus)
+* Note: hover may be applied to elements other than anchor tags
+* Hyperlinks can match multiple states (hover & visited) so order of rules matters
+
+Example:  
+[style9.css](style9.css)  
+[pseudo.html](pseudo.html)  
+
+List Styles
+===
