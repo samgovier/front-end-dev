@@ -1,0 +1,18 @@
+.inside
+{
+    list-style-position: inside;
+    list-style-type: lower-roman;
+}
+.outside
+{
+    list-style-position: outside;
+    list-style-type: lower-roman;
+}
+ul
+{
+    list-style-type: square;
+}
+#special
+{
+    list-style: url(./images/face.png) inside;
+}

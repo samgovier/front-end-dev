@@ -739,3 +739,46 @@ Example:
 
 List Styles
 ===
+
+* May specify the below elements, or use `list-style` as a shortcut to combine type/image and position
+* Applies to elements: ol, ul, li
+* All properties are inherited
+
+list-style-type
+---
+
+* Used to declare the type of marker system to be used in presentation of list
+* Keywords: disc, circle, square, decimal, upper-alpha, lower-alpha, upper-roman, lower-roman, none, ...
+
+Eg.
+
+    ul
+    {
+        list-style-type: square;
+    }
+
+list-style-image
+---
+
+Specifies tye image used as marker: value is URL or keyword none
+
+    #special
+    {
+        list-style-image: url(./images/face.png)
+    }
+
+list-style-position
+---
+Used to declare position of the list marker with respect to the list item. Inside or outside
+
+    ol
+    {
+        list-style-position: inside;
+    }
+
+Examples:  
+[style10.css](style10.css)  
+[list.html](list.html)  
+
+Table Styles
+===
