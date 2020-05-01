@@ -782,3 +782,36 @@ Examples:
 
 Table Styles
 ===
+
+* Tables hav emargins and border spacing (corresponds to cellspacing attribute in HTML).
+* Cells have padding: set padding in CSS
+* Borders set at cell, row, column, or table level
+* Borders collapse into each other where they adjoin: Only 1 border drawn. The "most interesting" border wins
+![table layout](TableLayout.png)
+
+Collapsing Border Rules
+---
+* Hidden borders take precedence over other styles
+* Border with a style of none have lowest priority
+* Narrow borders lose out to wider ones
+* For same width use preferred border style order: double, solid, dashed, dotted
+* For same width and style but different color, preferred element to take color from order: cell, row, column, table
+* border-collapse property
+    * Determines if borders in a table are collapsed or not
+    * Keywords: collapse, separate
+    * Defaults to separate
+    * Use the table attribute cellspacing only if border-colllapse is separate
+
+Eg.
+
+    table
+    {
+        border-collapse: collapse;
+    }
+
+Example:  
+[style11.css](style11.css)  
+[table.html](table.html)  
+
+Types of Layouts
+===
