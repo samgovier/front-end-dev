@@ -1,0 +1,24 @@
+#allcontent 
+{
+    width: 800px;
+    padding: 5px;  
+    background-color: #646467; /* grey */
+    margin-left: auto;
+    margin-right: auto;  
+}
+.main 
+{
+    background-color: #86A4FF; /* blue */
+}
+.steps 
+{   
+    background-color: #89B255; /* green */
+}
+#header, #footer 
+{
+    background-color: #FFB39F; /* peach */
+}
+#footer 
+{
+    text-align: center;
+}

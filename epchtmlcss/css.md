@@ -815,3 +815,47 @@ Example:
 
 Types of Layouts
 ===
+
+Liquid
+---
+* Content of page expands to fit the window
+* What we have been doing so far
+
+Frozen
+---
+* Width of content is fixed
+* Avoids problems caused by window expanding
+* Put div around all content, give it an id like "allcontent" and style it to set the width
+
+eg.
+
+    #allcontent
+    {
+        width: 800px;
+    }
+
+Layout Example:  
+[style12.css](style12.css)  
+[frozen.html](frozen.html)  
+
+Centered
+---
+* Content width is fixed but margins expand as needed using auto
+* Set up like frozen, but add left and right margins of auto
+* The content is centered as window expands
+
+Eg.
+
+    #allcontent
+    {
+        width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+Centered Example:  
+[style13.css](style13.css)  
+[centered.html](centered.html)  
+
+Floating
+===
