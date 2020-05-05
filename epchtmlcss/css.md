@@ -859,3 +859,30 @@ Centered Example:
 
 Floating
 ===
+
+* Floating allows element to be positioned to left or right of containing block
+* Position floating content before content to flow beside it in document
+* Content following flows beside the element
+* Give floating content a width
+* Give content beside it a margin equal to the width of floating content to make columns
+* To position something below the float, use clear property
+* Floating elements don't collapse margins because they float on top
+* Potential downside is reordering of document
+
+float
+---
+* Moves an element to left or right of parent element
+* Floated elements are removed from the normal flow and treated as block-level elements
+* Keywords: left, right, none
+
+clear
+---
+* Lists the sides on which floating elements are not allowed
+* Keywords: none, left, right, both
+
+Example:  
+[style14.css](style14.css)  
+[float.html](float.html)  
+
+Positioning
+===
