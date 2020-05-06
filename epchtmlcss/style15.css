@@ -1,0 +1,22 @@
+.main
+{
+    background-color: #86A4FF; /* blue */
+    margin-right: 200px;
+}
+.steps
+{
+    position: absolute;
+    top: 60px;
+    right: 0px;
+    width: 200px;
+    background-color: #89B255; /* green */
+}
+#header, #footer
+{
+    background-color: #FFB39F; /* peach */
+}
+#footer
+{
+    text-align: center;
+    margin-right: 200px;
+}

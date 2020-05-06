@@ -886,3 +886,78 @@ Example:
 
 Positioning
 ===
+
+Controlling Positioning
+---
+
+### position
+
+Specifies the method by which position of the element's box is determined: static, relative, absolute, fixed. Static by default
+
+    .steps
+    {
+        position: absolute;
+    }
+
+### top, right, bottom, left
+
+Specifies the position of fixed, absolutely, and relatively positioned elements. Value is number, percentage, or `auto`.
+
+    .steps
+    {
+        /* Elements stick to right side of browser */
+        right: 0px;
+    }
+
+### z-index
+* Specifies the order in which overlapping sibling elements are stacked on top of each other
+* Normally elements that come later in the source document are on top of earlier elements
+* Higher numbers are on top, negative number on bottom
+* Value is `auto` or integer: a negative value places the element behind its containing block
+
+eg.
+
+    .steps
+    {
+        z-index: -1;
+    }
+
+Types of Positioning
+---
+
+### Static Positioning
+* Element is placed inside its parent's content box according to the normal flow. Default.
+
+### Relative Positioning
+* Element's normal position is calculated then it is offset from this position
+* Following elements positioned as if the element had not been offset
+* The flow stays the same, just the relative div is moved over in its location
+
+Eg.  
+[style17.css](style17.css)  
+[relative.html](relative.html)  
+
+### Absolute Positioning
+* Absolutely positioned elements do not exist in the normal document flow
+* They may be layered on top of each other
+* Eg. to position a sidebar on the right:
+    * Sidebar: position is absolute, some distance down from top, 0 pixels from right, assign a width
+    * Main body: right margin the size of the side bar
+    * Footer: also need to set the right margin
+
+Eg.  
+[style15.css](style15.css)  
+[absolute.html](absolute.html)  
+
+### Fixed Positioning
+* Behaves like absolute
+* Its position is an offset from the browser window, not the page
+* Just like absolute except that area moved will not scroll
+* May use negative margins to move things off the screen: these will still be read by screen readers
+
+Eg.  
+[style16.css](style16.css)  
+[fixed.html](fixed.html)  
+
+Display Options
+===
