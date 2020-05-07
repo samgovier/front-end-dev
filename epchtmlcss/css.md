@@ -961,3 +961,40 @@ Eg.
 
 Display Options
 ===
+
+visibility
+---
+* Makes an element completely transparent without removing it from the document flow
+* Hidden elements are not read by screen readers
+* Keywords: visible, hidden, collapse
+    * Collapse is used in tables to remove columns or rows
+
+display
+---
+* Used to define the kind of display box an element generates during layout
+* Elements that are display:none are not read by screen readers
+* Keywords: none, inline, block
+
+Position off screen
+---
+* Things positioned off the screen are read by screen readers when reached in document flow
+* To position off screen use: negative margin; negative top, right, bottom, left
+
+Eg.
+
+    #offscreen
+    {
+        position: absolute;
+        left: -10000px;
+        top: auto;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+    }
+
+Example:  
+[style18.css](style18.css)  
+[visible.html](visible.html)
+
+Flexible Layouts
+===
