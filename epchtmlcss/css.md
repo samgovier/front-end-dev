@@ -998,3 +998,117 @@ Example:
 
 Flexible Layouts
 ===
+
+Overview
+---
+
+It's difficult to write applications that look good on a myriad of screen sizes and resolutions. CSS has features that make this easier: flexbox and media queries.  
+__Flexbox__ allows you to create containers that will resize and rearrange according to the width of the page.  
+__Media Queries__ allow you to apply specific styles to your page depending on what size your screen currently is.
+
+Flexbox
+---
+One of the most powerful features of CSS is the flexbox. Flexbox allows divs to automatically fill in a section of the page given constraints. Flexboxes are appropriate to the following situations:
+* You want elements to display alongside each other without caring about exact sizes.
+* You want an element to take up the remaining space of its parent.
+* You find yourself calculating the pixels required to make elements not overflow.
+
+A flex box consists of two types of elements, the flex container and flex items. Flex items will resize and move within the parent container.
+
+    #parent
+    {
+        display: flex;
+    }
+
+    #red
+    {
+        flex: 1 0 0px;
+    }
+
+### Flex Containers
+There are a variety of different CSS properties that can be used to modify a flex container. Properties on the flex container will modify how flex items are positioned within the container.
+
+#### Display: Flex
+This defines an element as a flex container. All of this element's direct children then will be interpreted as flex items.
+
+    .flexContainer
+    {
+        display: flex;
+    }
+
+#### flex-direction
+Flex direction defines what direction flex items will be placed within the flex container. Default is row.
+
+| CSS Property | Result |
+| - | - |
+| `flex-direction: row` | flex items will be arranged left to right |
+| `flex-direction: row-reverse` | flex items will be arranged right to left |
+| `flex-direction: column` | flex items will be arranged top to bottom |
+| `flex-direction: column-reverse` | flex items will be arranged bottom to top |
+
+#### flex-wrap
+Flex wrap defines whether flex items should wrap to the next line when you run out of space. This is important when you're attempting to handle different screen sizes. Default is nowrap.
+
+| CSS Property | Result |
+| - | - |
+| `flex-wrap:no-wrap` | all flex items will be on one line |
+| `flex-wrap:wrap` | flex items will wrap onto multiple lines if there isn't enough space |
+| `flex-wrap:wrap-reverse` | flex items will wrap onto multiple lines from bottom to top |
+
+
+### Flex Items
+While flex containers have properties that determine how their child items are arranged, flex items have properties that determine how an item will display.
+
+#### flex
+The main property for flex items is the flex property. The flex property is actually a shorthand for three other properties: flex-grow, flex-shrink, and flex-basis. Shorthand looks like this:
+
+    .flexItem
+    {
+        flex: <flex-grow> <flex-shrink> <flex-basis>
+    }
+
+__flex-grow__ takes in a number that defines how this flex item should grow to fill space proportional to other flex items. If all flex items have a flex-grow of 1, the space in the flex container will be distributed evenly. If one has a flex-grow of 2, it will take up twice as much space as an item with a value of 1.
+
+__flex-shrink__ works the same way as flex-grow, but defines how a flex item should shrink to fulfill space. Just like with flex-grow, if all items have a value of 1 they will shrink equivalently. If one item has a flex-shrink value of 2, it will shrink twice as much as an element with a flex-shrink value of 1.
+
+__flex-basis__ defines the default width of an element before flex-grow and flex-shrink allow it to resize. Internet Explorer requires that value has a unit of measurement (px, %, vw, vh) specified with it.
+
+Media Queries
+---
+Media queries allow CSS to optionally apply to a page depending on whether the current browser window matches a set of conditions. The following are common scenarios for media queries:
+* Hiding printing elements
+* Hiding certain elements on mobile
+* Different styles if JavaScript is disabled
+* Changing colors or design elements depending on the browser width
+
+Media queries should not be used to change the layout depending on the screen size. Flexbox and other responsive techniques should be used for that task.
+
+Apply style.css only if this page has a width less than 800px:
+
+
+    <head>
+        ...
+        <link rel="stylesheet" media="screen AND (max-width: 800px) " type="text/css" href="style.css"/>
+    </head>
+
+Make the body background green only if this page has a width between 350px and 800px:
+
+    @media screen AND (max-width: 800px) AND (min-width: 350px) {
+        body {
+            background: green;
+        }
+    }
+
+### Media Features
+Conditions can be tested on various parts of the browser. These testable variables are called media features. Below are the most common. Full list [here](https://developer.mozilla.org/en-US/docs/Web/CSS/Media_Queries/Using_media_queries#Media_features).
+
+
+Media Feature|Summary
+|-|-|
+min-width|The minimum width this query will apply to
+max-width|The maximum width this query will apply to.
+min-height|The minimum height this query will apply to.
+max-height|The maximum height this query will apply to.
+orientation|Equal to "portrait" or "landscape" depending on the orientation of the device
+screen|Boolean representing this page is being displayed on a screen
+print|Boolean representing this page is being printed
