@@ -118,9 +118,11 @@ Comments
 __Element Types__
 ---
 
-*Block Elements* - items that are followed by a line break, may contain text, other block elements, inline elements. Most are containers for other elements. This includes: `p, h1, h2, ol, ul, blockquote, table, div`
+*Block Elements* - items that are followed by a line break.  
+May contain text, other block elements, inline elements. Most are containers for other elements. This includes: `p, h1, h2, ol, ul, blockquote, table, div`
 
-*Inline Elements* - exist inline with text, must be contained in a block element, may only contain text or other inline elements. No implied line breaks before or after. Includes: `br, em, strong, a, img, span`
+*Inline Elements* - exist inline with text, must be contained in a block element.  
+May only contain text or other inline elements. No implied line breaks before or after. Includes: `br, em, strong, a, img, span`
 
 Block Element Examples
 ---
@@ -130,6 +132,9 @@ Block Element Examples
 
 `blockquote` tag - Enclosed text is a quote block with 1+ paragraphs. Requires at least one block element. The block may be rendered indented.
 * you can add `cite="URL"` that sources the quote, not visible
+
+Inline Element Examples
+---
 
 `br` tag - inserts a line break. Always an empty element: `<br />`
 
@@ -191,7 +196,7 @@ Link lables should be kept concise and meaningful. Titles should provide more in
 Images
 ===
 
-`img` tag Places an image on the page. Images are retrieved after the page is retrieved, and is always an empty element.
+`img` tag places an image on the page. Images are retrieved after the page is retrieved, and is always an empty element.
 
 Attributes:
 * `src="text"` - required, location of the graphic file to be displayed
