@@ -252,7 +252,7 @@ Cascade is used to resolve conflicts in styles. Ignores author vs. reader vs. br
 4. Sort any conflicting rules in the order they appear in their individual style sheets. Rules listed later are more important.
 
 Examples:  
-[style2.css](style2.css)  
+[style2.css](eg\style\style2.css)  
 [cascade.html](eg\cascade.html)
 
 Tools
@@ -379,7 +379,7 @@ Eg.
     }
 
 Examples:  
-[style3.css](style3.css)  
+[style3.css](eg\style\style3.css)  
 [fonts.html](eg\fonts.html)
 
 Box Model
@@ -398,7 +398,7 @@ Inline-level element
 
 Block-level Layout
 ---
-![Illustration of Block-level Layout](BlockLayout.png)
+![Illustration of Block-level Layout](eg\img\BlockLayout.png)
 
 * Background extends to outer edge of border, filling content, padding, border areas
 * Margins are transparent
@@ -411,7 +411,7 @@ Block-level Layout
 
 Inline-level Layout
 ---
-![Illustration of Inline-level Layout](InlineLayout.png)
+![Illustration of Inline-level Layout](eg\img\InlineLayout.png)
 
 * line height: leading + content
 * Leading is the difference between line-height and font-size
@@ -419,7 +419,7 @@ Inline-level Layout
 
 Margins
 ---
-![Illustration of Margin Layout](Margins.png)
+![Illustration of Margin Layout](eg\img\Margins.png)
 
 * With adjacent inline elements, the margins are added.
 * With stacked block elements, margin is collapsed to larger margin.
@@ -430,7 +430,7 @@ line-height
 * Value is number or percentage of font-size
 
 Examples:  
-[style4.css](style4.css)  
+[style4.css](eg\style\style4.css)  
 [lineheight.html](eg\lineheight.html)
 
 Background
@@ -480,7 +480,7 @@ Eg.
     }
 
 Example:  
-[style5.css](style5.css)  
+[style5.css](eg\style\style5.css)  
 [background.html](eg\background.html)  
 
 Layout Properties
@@ -596,7 +596,7 @@ Value is a number of pixels, percentage of containing block, or keyword `auto`
     }
 
 Example:  
-[style6.css](style6.css)  
+[style6.css](eg\style\style6.css)  
 [layout.html](eg\layout.html)  
 
 Shortcuts
@@ -704,7 +704,7 @@ Single rule for size of margin overall or on each side. Same clockwise rules: al
     }
 
 Example:  
-[style8.css](style8.css)  
+[style8.css](eg\style\style8.css)  
 [Shortcuts.html](eg\Shortcuts.html)  
 
 Pseudo-classes & Hyperlinks
@@ -777,7 +777,7 @@ Used to declare position of the list marker with respect to the list item. Insid
     }
 
 Examples:  
-[style10.css](style10.css)  
+[style10.css](eg\style\style10.css)  
 [list.html](eg\list.html)  
 
 Table Styles
@@ -787,7 +787,7 @@ Table Styles
 * Cells have padding: set padding in CSS
 * Borders set at cell, row, column, or table level
 * Borders collapse into each other where they adjoin: Only 1 border drawn. The "most interesting" border wins
-![table layout](TableLayout.png)
+![table layout](eg\img\TableLayout.png)
 
 Collapsing Border Rules
 ---
@@ -810,7 +810,7 @@ Eg.
     }
 
 Example:  
-[style11.css](style11.css)  
+[style11.css](eg\style\style11.css)  
 [table.html](eg\table.html)  
 
 Types of Layouts
@@ -835,7 +835,7 @@ eg.
     }
 
 Layout Example:  
-[style12.css](style12.css)  
+[style12.css](eg\style\style12.css)  
 [frozen.html](eg\frozen.html)  
 
 Centered
@@ -854,7 +854,7 @@ Eg.
     }
 
 Centered Example:  
-[style13.css](style13.css)  
+[style13.css](eg\style\style13.css)  
 [centered.html](eg\centered.html)  
 
 Floating
@@ -881,7 +881,7 @@ clear
 * Keywords: none, left, right, both
 
 Example:  
-[style14.css](style14.css)  
+[style14.css](eg\style\style14.css)  
 [float.html](eg\float.html)  
 
 Positioning
@@ -934,7 +934,7 @@ Types of Positioning
 * The flow stays the same, just the relative div is moved over in its location
 
 Eg.  
-[style17.css](style17.css)  
+[style17.css](eg\style\style17.css)  
 [relative.html](eg\relative.html)  
 
 ### Absolute Positioning
@@ -946,7 +946,7 @@ Eg.
     * Footer: also need to set the right margin
 
 Eg.  
-[style15.css](style15.css)  
+[style15.css](eg\style\style15.css)  
 [absolute.html](eg\absolute.html)  
 
 ### Fixed Positioning
@@ -956,7 +956,7 @@ Eg.
 * May use negative margins to move things off the screen: these will still be read by screen readers
 
 Eg.  
-[style16.css](style16.css)  
+[style16.css](eg\style\style16.css)  
 [fixed.html](eg\fixed.html)  
 
 Display Options
@@ -993,7 +993,7 @@ Eg.
     }
 
 Example:  
-[style18.css](style18.css)  
+[style18.css](eg\style\style18.css)  
 [visible.html](eg\visible.html)
 
 Flexible Layouts
@@ -1088,7 +1088,7 @@ Apply style.css only if this page has a width less than 800px:
 
     <head>
         ...
-        <link rel="stylesheet" media="screen AND (max-width: 800px) " type="text/css" href="style.css"/>
+        <link rel="stylesheet" media="screen AND (max-width: 800px) " type="text/css" href="style\style.css"/>
     </head>
 
 Make the body background green only if this page has a width between 350px and 800px:
