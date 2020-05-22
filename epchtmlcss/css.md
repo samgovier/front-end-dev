@@ -253,7 +253,7 @@ Cascade is used to resolve conflicts in styles. Ignores author vs. reader vs. br
 
 Examples:  
 [style2.css](style2.css)  
-[cascade.html](cascade.html)
+[cascade.html](eg\cascade.html)
 
 Tools
 ---
@@ -380,7 +380,7 @@ Eg.
 
 Examples:  
 [style3.css](style3.css)  
-[fonts.html](fonts.html)
+[fonts.html](eg\fonts.html)
 
 Box Model
 ===
@@ -431,7 +431,7 @@ line-height
 
 Examples:  
 [style4.css](style4.css)  
-[lineheight.html](lineheight.html)
+[lineheight.html](eg\lineheight.html)
 
 Background
 ===
@@ -481,7 +481,7 @@ Eg.
 
 Example:  
 [style5.css](style5.css)  
-[background.html](background.html)  
+[background.html](eg\background.html)  
 
 Layout Properties
 ===
@@ -597,7 +597,7 @@ Value is a number of pixels, percentage of containing block, or keyword `auto`
 
 Example:  
 [style6.css](style6.css)  
-[layout.html](layout.html)  
+[layout.html](eg\layout.html)  
 
 Shortcuts
 ===
@@ -705,7 +705,7 @@ Single rule for size of margin overall or on each side. Same clockwise rules: al
 
 Example:  
 [style8.css](style8.css)  
-[Shortcuts.html](Shortcuts.html)  
+[Shortcuts.html](eg\Shortcuts.html)  
 
 Pseudo-classes & Hyperlinks
 ===
@@ -735,7 +735,7 @@ Hyperlinks
 
 Example:  
 [style9.css](style9.css)  
-[pseudo.html](pseudo.html)  
+[pseudo.html](eg\pseudo.html)  
 
 List Styles
 ===
@@ -778,7 +778,7 @@ Used to declare position of the list marker with respect to the list item. Insid
 
 Examples:  
 [style10.css](style10.css)  
-[list.html](list.html)  
+[list.html](eg\list.html)  
 
 Table Styles
 ===
@@ -811,7 +811,7 @@ Eg.
 
 Example:  
 [style11.css](style11.css)  
-[table.html](table.html)  
+[table.html](eg\table.html)  
 
 Types of Layouts
 ===
@@ -836,7 +836,7 @@ eg.
 
 Layout Example:  
 [style12.css](style12.css)  
-[frozen.html](frozen.html)  
+[frozen.html](eg\frozen.html)  
 
 Centered
 ---
@@ -855,7 +855,7 @@ Eg.
 
 Centered Example:  
 [style13.css](style13.css)  
-[centered.html](centered.html)  
+[centered.html](eg\centered.html)  
 
 Floating
 ===
@@ -882,7 +882,7 @@ clear
 
 Example:  
 [style14.css](style14.css)  
-[float.html](float.html)  
+[float.html](eg\float.html)  
 
 Positioning
 ===
@@ -935,7 +935,7 @@ Types of Positioning
 
 Eg.  
 [style17.css](style17.css)  
-[relative.html](relative.html)  
+[relative.html](eg\relative.html)  
 
 ### Absolute Positioning
 * Absolutely positioned elements do not exist in the normal document flow
@@ -947,7 +947,7 @@ Eg.
 
 Eg.  
 [style15.css](style15.css)  
-[absolute.html](absolute.html)  
+[absolute.html](eg\absolute.html)  
 
 ### Fixed Positioning
 * Behaves like absolute
@@ -957,7 +957,7 @@ Eg.
 
 Eg.  
 [style16.css](style16.css)  
-[fixed.html](fixed.html)  
+[fixed.html](eg\fixed.html)  
 
 Display Options
 ===
@@ -994,7 +994,7 @@ Eg.
 
 Example:  
 [style18.css](style18.css)  
-[visible.html](visible.html)
+[visible.html](eg\visible.html)
 
 Flexible Layouts
 ===
