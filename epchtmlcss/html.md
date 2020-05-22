@@ -273,53 +273,6 @@ Form tags are used for data entry and input controls:
 Attributes make elements behave or render differently, eg. `input` can be a textbox, button, checkbox, or more.  
 See below for example (rendered in actual HTML!)
 
-
-<h1>Example Form</h1>
-<form action="">
-    <label for="txt1">Input text:</label>
-    <input id="txt1" type="text" />
-    <br />
-    <label for="secret">Password input:</label>
-    <input id="secret" type="password" />
-    <br />
-    <label for="txtarea">Text area:</label>
-    <textarea id="txtarea" cols="20" rows="2"></textarea>
-    <br />
-    <br />
-    <input id="chk1" type="checkbox" />
-    <label for="chk1">Input check box 1</label>
-    <br />
-    <input id="chk2" type="checkbox" />
-    <label for="chk2">Input check box 2</label>
-    <br />
-    <input id="chk3" type="checkbox" />
-    <label for="chk3">Input check box 3</label>
-    <br />
-    <br />
-    <fieldset>
-        <legend>Radio buttons</legend>
-        <input id="opt1" type="radio" name="opt" value="1" />
-        <label for="opt1">Option 1</label>
-        <br />
-        <input id="opt2" type="radio" name="opt" value="2" />
-        <label for="opt2">Option 2</label>
-        <br />
-        <input id="opt3" type="radio" name="opt" value="3" />
-        <label for="opt3">Option 3</label>
-    </fieldset>
-    <br />
-    <label for="choice">Select:</label>
-    <select id="choice">
-        <option value="1">Option 1</option>
-        <option value="2">Option 2</option>
-        <option value="3">Option 3</option>
-    </select>
-    <br />
-    <br />
-    <input id="btn1" type="button" value="My Button" />
-    <input id="btn3" type="reset" value="Reset" />
-</form>
-
     <h1>Example Form</h1>
     <form action="">
         <label for="txt1">Input text:</label>
