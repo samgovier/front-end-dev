@@ -69,7 +69,6 @@ External Styles are saved in a separate file that has a .css extension. The file
 * Styles can be changed independent of the markup file
 * The separate files are cached by the browser, which reduces consecutive load times
 * Styles can still be overridden within the markup if needed
-* (Keep in mind this document has mostly embedded styles, for ease of reading)
 
 In `link`, there is a `media` attribute used to describe when this style sheet should be included. Various options are:
 
@@ -152,6 +151,7 @@ For the following selectors, `Selector#` may be an element, class, or id
 
 | Selector | Meaning |
 |-|-|
+| `Selector1, Selector2` | Selector1 and Selector2 as well |
 | `Selector1 Selector2` | Selector2, if it is a descendant of Selector1 |
 | `Selector1 > Selector2` | Selector2, if it is a child of Selector1 |
 | `Selector1 + Selector2` | Selector2, only if it immediately follows Selector1, and both are children of the same parent |
