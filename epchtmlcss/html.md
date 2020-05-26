@@ -191,7 +191,7 @@ Attributes:
 * `id="name"` - create a named anchor that is used in a URL, docname#idName or just #idName in same document
 * `target="text"` - specifies the name of the window where the target document should be displayed. "_blank" opens a new browser window (not valid on strict XHTML)
 
-Link lables should be kept concise and meaningful. Titles should provide more information.
+Link labels should be kept concise and meaningful. Titles should provide more information.
 
 Images
 ===
