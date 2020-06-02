@@ -202,7 +202,7 @@ Colors
     * [Follow web standards](https://en.wikipedia.org/wiki/Web_colors)
     * Use color schemes from other sources (eg. [Adobe](http://kuler.adobe.com/))
     * Pick colors from a web page. Eg. Internet Explorer > Dev Tools F12 > Tools > Show Color Picker
-    * Use Web or Windows (eg. Paint) tools to find colors in decimal. If you get a number in decimal it can be converted to hexadecimal.
+    * Use Web or Windows (eg. Paint.NET) tools to find colors in decimal. If you get a number in decimal it can be converted to hexadecimal.
 
 Style Precedence
 ===
@@ -292,7 +292,7 @@ font-size
 ---
 
 * Value is keyword, percentage or absolute pixels
-* Keywords: xx-small, x-small, xmall, medium, large, x-large, xx-large
+* Keywords: xx-small, x-small, small, medium, large, x-large, xx-large
 * Recommended: choose a keyword for the body and use percentages to make other texts relative to that size
     * Allows users to resize text
 
@@ -710,7 +710,7 @@ Example:
 Pseudo-classes & Hyperlinks
 ===
 
-A CSS pseudo-class is a keyword added to selectors that specifies a special state of the element to be selected. For example :hover will apply when the user hovers over the element specified by the selector
+A CSS pseudo-class is a keyword added to selectors that specifies a special state of the element to be selected. For example `:hover` will apply when the user hovers over the element specified by the selector
 * Acts like a class but isn't really
 * Browser adds & removes pseudo classes automatically
 * May be styled like other classes
@@ -783,7 +783,7 @@ Examples:
 Table Styles
 ===
 
-* Tables hav emargins and border spacing (corresponds to cellspacing attribute in HTML).
+* Tables have margins and border spacing (corresponds to cellspacing attribute in HTML).
 * Cells have padding: set padding in CSS
 * Borders set at cell, row, column, or table level
 * Borders collapse into each other where they adjoin: Only 1 border drawn. The "most interesting" border wins
@@ -800,7 +800,7 @@ Collapsing Border Rules
     * Determines if borders in a table are collapsed or not
     * Keywords: collapse, separate
     * Defaults to separate
-    * Use the table attribute cellspacing only if border-colllapse is separate
+    * Use the table attribute cellspacing only if border-collapse is separate
 
 Eg.
 
