@@ -1,0 +1,25 @@
+#visible #face1
+{
+    visibility: hidden;
+}
+#visible:hover #face1
+{
+    visibility: visible;
+}
+#display #face2
+{
+    display: none;
+}
+#display:hover #face2
+{
+    display: inline;
+}
+#offscreen
+{
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}

@@ -1,0 +1,19 @@
+.steps
+{
+    position: relative;
+    left: 200px;
+    width: 200px;
+    background-color: #89B255; /* green */
+}
+.main
+{
+    background-color: #86A4FF; /* blue */
+}
+#header, #footer
+{
+    background-color: #FFB39F; /* peach */
+}
+#footer
+{
+    text-align: center;
+}

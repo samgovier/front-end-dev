@@ -1,0 +1,42 @@
+body
+{
+    font-family: Verdana, Arial, sans-serif;
+    font-size: small;
+}
+h1
+{
+    font-size: 150%;
+}
+h2
+{
+    font-size: 120%;
+    color: navy;
+}
+.code
+{
+    font-family: "Courier New", monospace;
+}
+.enterdata
+{
+    font-weight: bold;
+}
+.prompt
+{
+    font-style: italic;
+}
+.under
+{
+    text-decoration: underline;
+}
+.right
+{
+    text-align: right;
+}
+.indent
+{
+    text-indent: 20px;
+}
+.nowrap
+{
+    white-space: nowrap;
+}

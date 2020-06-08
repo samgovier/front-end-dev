@@ -1,0 +1,16 @@
+#links a:link
+{
+    color: green;
+}
+#links a:visited
+{
+    color: maroon;
+}
+#links a:hover, #links a:active, #links a:focus
+{
+    color: red;
+}
+#aquote blockquote:hover
+{
+    background-color: yellow;
+}

@@ -1,0 +1,18 @@
+table
+{
+    background-color: silver;
+    border: green dashed thick;
+    margin-left: 200px;
+    font-family: monospace;
+    font-size: small;
+	border-spacing: 10px;
+}
+th, td
+{
+    border: black dotted thin;
+    padding: 10px;
+}
+#collapse
+{
+    border-collapse: collapse;
+}
